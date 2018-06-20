@@ -21,3 +21,7 @@
 .text-white {
   color: white;
 }
+
+.main-header-top .logo {
+  font-size: 28px !important;
+}
