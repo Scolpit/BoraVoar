@@ -1,3 +1,23 @@
 .float-right {
   float: right;
 }
+
+.margin-top--9 {
+  margin-top: -9px;
+}
+
+.margin-top--2 {
+  margin-top: -2px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.text-white {
+  color: white;
+}
