@@ -25,3 +25,12 @@
 .main-header-top .logo {
   font-size: 28px !important;
 }
+
+.main-header-top .sidebar-toggle:before {
+  content: "" !important;
+}
+
+.three-bars {
+  position: absolute;
+  font-size: 20px;
+}

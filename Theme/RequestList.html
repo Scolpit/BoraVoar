@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bora voar</title>
+
+    <!-- Favicon icon -->
+    <!-- <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> -->
+
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <!-- iconfont -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css"> -->
+
+    <!-- BV_Font Awsome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+
+    <!-- simple line icon -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/icon/simple-line-icons/css/simple-line-icons.css"> -->
+
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+
+    <!-- BoraVoar CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/boravoar.css">
+
+    <!-- Echart js -->
+    <!-- <script src="assets/plugins/charts/echarts/js/echarts-all.js"></script> -->
+
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <!-- Responsive.css-->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/responsive.css"> -->
+
+    <!--color css-->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/color/color-1.min.css" id="color" /> -->
+
+</head>
+
+<body class="sidebar-mini fixed">
+    <div class="loader-bg">
+        <div class="loader-bar">
+        </div>
+    </div>
+    <div class="wrapper">
+
+        <!-- Navbar-->
+        <header class="main-header-top hidden-print">
+            <a href="index.html" class="logo">
+                <b>B</b>ora
+                <b>V</b>oar
+            </a>
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#!" data-toggle="offcanvas" class="sidebar-toggle">
+                    <i class="fas fa-bars three-bars"></i>
+                </a>
+                <!-- Navbar Right Menu-->
+                <div class="navbar-custom-menu f-right">
+
+                    <ul class="top-nav">
+
+                        <!-- window screen -->
+                        <li class="pc-rheader-submenu">
+                            <a href="#!" class="drop icon-circle" onclick="javascript:toggleFullScreen()">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </a>
+
+                        </li>
+                        <!-- User Menu-->
+                        <li class="dropdown">
+                            <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle drop icon-circle drop-image">
+                                <span>
+                                    <img class="img-circle " src="assets/images/avatar-1.png" style="width:40px;" alt="User Image">
+                                </span>
+                                <span>John
+                                    <b>Doei</b>
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu settings-menu">
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-user"></i> Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#!">
+                                        <i class="fas fa-power-off"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Side-Nav-->
+        <aside class="main-sidebar hidden-print ">
+            <section class="sidebar" id="sidebar-scroll">
+
+                <div class="user-panel">
+                    <div class="f-left image">
+                        <img src="assets/images/avatar-1.png" alt="User Image" class="img-circle">
+                    </div>
+                    <div class="f-left info">
+                        <p>John Doe</p>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu-->
+                <ul class="sidebar-menu">
+                    <li class="nav-level">Menu</li>
+                    <li class="treeview">
+                        <a class="waves-effect waves-dark" href="CarList.html">
+                            <i class="fas fa-car"></i>
+                            <span> Viaturas</span>
+                        </a>
+                    </li>
+                    <li class="active treeview">
+                        <a class="waves-effect waves-dark" href="RequestList.html">
+                            <i class="fas fa-parachute-box"></i>
+                            <span> Pedidos</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <div class="content-wrapper">
+
+            <!-- Container-fluid starts -->
+            <!-- Main content starts -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="main-header">
+                        <h4>Viaturas</h4>
+                    </div>
+                </div>
+
+                <!-- 4-blocks row start -->
+                <div class="row m-b-30 dashboard-header">
+
+                    <div class="col-lg-6 col-sm-6">
+                        <a href="CarList.html">
+                            <div class="col-sm-12 card dashboard-product">
+                                <span>Viaturas disponiveis</span>
+                                <h2 class="dashboard-total-products counter">8</h2>
+                                <div class="side-box bg-warning">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <a href="RequestList.html">
+                            <div class="col-sm-12 card dashboard-product">
+                                <span>Pedidos de boleia</span>
+                                <h2 class="dashboard-total-products counter">12</h2>
+                                <div class="side-box bg-primary">
+                                    <i class="fas fa-parachute-box"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+                <!-- 4-blocks row end -->
+                <!-- 2-1 block start -->
+
+                <div class="row">
+                    <!-- Pedidos de boleia -->
+                    <div class="col-xs-12">
+                        <!-- start tab-pane of project tab -->
+                        <div class="tab-pane" id="project" role="tabpanel">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Pedidos de boleia para 2018-05-23</h5>
+
+                                </div>
+                                <!-- end of card-header  -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="project-table">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center txt-primary pro-pic"></th>
+                                                            <th class="text-center txt-primary">Nome</th>
+                                                            <th class="text-center txt-primary">Data</th>
+                                                            <th class="text-center txt-primary">Destino</th>
+                                                            <th class="text-center txt-primary"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-center">
+                                                        <!-- Pedidos de boleia individuais -->
+                                                        <tr>
+                                                            <td>
+                                                                <img src="assets/images/avatar-2.png" class="img-circle" alt="tbl">
+                                                            </td>
+                                                            <td>Nuno Morgado</td>
+                                                            <td>2018-03-27</td>
+                                                            <td>Lisboa
+                                                                <i class="fas fa-arrow-right"></i> Castelo de Vide
+                                                            </td>
+                                                            <td class="faq-table-btn">
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                    Convidar
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="assets/images/avatar-2.png" class="img-circle" alt="tbl">
+                                                            </td>
+                                                            <td>Nuno Morgado</td>
+                                                            <td>2018-03-27</td>
+                                                            <td>Lisboa
+                                                                <i class="fas fa-arrow-right"></i> Castelo de Vide
+                                                            </td>
+                                                            <td class="faq-table-btn">
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Adicionar à viatura">
+                                                                    Convidar
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!-- end of table -->
+                                            </div>
+                                            <!-- end of table responsive -->
+                                        </div>
+                                        <!-- end of project table -->
+                                    </div>
+                                    <!-- end of col-lg-12 -->
+                                </div>
+                                <!-- end of row -->
+                            </div>
+                            <!-- end of card-main -->
+                        </div>
+                        <!-- end of project pane -->
+                    </div>
+                    <!-- Fim de pedidos de boleia -->
+                </div>
+                <!-- 2-1 block end -->
+            </div>
+            <!-- Main content ends -->
+            <!-- Container-fluid ends -->
+
+        </div>
+    </div>
+
+    <!-- Required Jqurey -->
+    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="assets/plugins/tether/dist/js/tether.min.js"></script>
+
+    <!-- Required Fremwork -->
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- waves effects.js -->
+    <script src="assets/plugins/Waves/waves.min.js"></script>
+
+    <script src="assets/js/boravoar.js"></script>
+
+    <!-- Scrollbar JS-->
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+    <!--classic JS-->
+    <script src="assets/plugins/classie/classie.js"></script>
+
+    <!-- notification -->
+    <script src="assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+    <!-- Rickshaw Chart js -->
+    <!-- <script src="assets/plugins/d3/d3.js"></script>
+    <script src="assets/plugins/rickshaw/rickshaw.js"></script> -->
+
+    <!-- Sparkline charts -->
+    <!-- <script src="assets/plugins/jquery-sparkline/dist/jquery.sparkline.js"></script> -->
+
+    <!-- Counter js  -->
+    <script src="assets/plugins/waypoints/jquery.waypoints.min.js"></script>
+    <script src="assets/plugins/countdown/js/jquery.counterup.js"></script>
+
+    <!-- custom js -->
+    <script type="text/javascript" src="assets/js/main.min.js"></script>
+    <script type="text/javascript" src="assets/pages/dashboard.js"></script>
+    <script type="text/javascript" src="assets/pages/elements.js"></script>
+    <script src="assets/js/menu.min.js"></script>
+
+    <script>
+        var $window = $(window);
+        var nav = $('.fixed-button');
+        $window.scroll(function () {
+            if ($window.scrollTop() >= 200) {
+                nav.addClass('active');
+            }
+            else {
+                nav.removeClass('active');
+            }
+        });
+    </script>
+</body>
+
+</html>
