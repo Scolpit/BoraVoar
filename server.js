@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
-// const users = require("./routes/api/users");
+const users = require("./routes/api/users");
 // const profile = require("./routes/api/profile");
 // const posts = require("./routes/api/posts");
 
@@ -32,7 +32,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-// app.use("/api/users", users);
+app.use("/api/users", users);
 // app.use("/api/profile", profile);
 // app.use("/api/posts", posts);
 
