@@ -6,7 +6,7 @@ const path = require("path");
 
 const users = require("./routes/api/users");
 const rides = require("./routes/api/rides");
-// const posts = require("./routes/api/posts");
+const cars = require("./routes/api/cars");
 
 const app = express();
 const db = require("./config/keys").mongoURI;
@@ -34,7 +34,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/rides", rides);
-// app.use("/api/posts", posts);
+app.use("/api/cars", cars);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

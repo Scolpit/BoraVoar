@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "270580e1-14ed-416f-8e5c-8f7ffa7a1531",
+					"id": "0409dbef-7f16-4b49-9743-14e2a9193f46",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -124,7 +124,7 @@
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
 				},
 				{
-					"id": "b6bee2a9-3f99-405c-9bb8-f5b0d654845a",
+					"id": "0b936cf4-178a-46bf-9b68-f4318214a7d3",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -383,6 +383,80 @@
 						"value": "{{token}}"
 					}
 				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/rides/5b2ff78f62928a3b94b4695e",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rides",
+						"5b2ff78f62928a3b94b4695e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Car (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "from",
+							"value": "Lisboa",
+							"type": "text"
+						},
+						{
+							"key": "to",
+							"value": "Castelo de Vide",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2018-06-28",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Para marrecar",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/cars/",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cars",
+			"request": {
+				"method": "GET",
+				"header": [],
 				"body": {
 					"mode": "urlencoded",
 					"urlencoded": [
@@ -399,15 +473,75 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{url}}/api/rides/5b2ff78f62928a3b94b4695e",
+					"raw": "http://{{url}}/api/cars",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"rides",
-						"5b2ff78f62928a3b94b4695e"
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "scolpit@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b2ffe96c9151a0dc0ebd5a4",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b2ffe96c9151a0dc0ebd5a4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Car By Id (P)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b2ffec7c9151a0dc0ebd5a5",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b2ffec7c9151a0dc0ebd5a5"
 					]
 				}
 			},
