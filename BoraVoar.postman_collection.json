@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b01951c3-8edf-43af-9377-fd093abfed9b",
+		"_postman_id": "b37d5d26-cc31-4031-999c-e730385a720b",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,49 @@
 			},
 			"response": [
 				{
-					"id": "0409dbef-7f16-4b49-9743-14e2a9193f46",
+					"id": "a51d38cd-5d7b-4e2e-940d-f35244098278",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"id": "7a482e67-2c69-4541-859f-0bae2246b67e",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -122,48 +164,6 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
-				},
-				{
-					"id": "0b936cf4-178a-46bf-9b68-f4318214a7d3",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
 				}
 			]
 		},
@@ -278,13 +278,11 @@
 						{
 							"key": "to",
 							"value": "Meco",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "date",
 							"value": "2018-06-25",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -383,7 +381,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/rides/5b2ff78f62928a3b94b4695e",
 					"protocol": "http",
@@ -420,19 +421,16 @@
 						{
 							"key": "to",
 							"value": "Castelo de Vide",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "date",
 							"value": "2018-06-28",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "description",
 							"value": "Para marrecar",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -531,7 +529,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b2ffec7c9151a0dc0ebd5a5",
 					"protocol": "http",
@@ -542,6 +543,43 @@
 						"api",
 						"cars",
 						"5b2ffec7c9151a0dc0ebd5a5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Ride to Car by name (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Artur",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b300253d6cc6323f88e5be1",
+						"ride"
 					]
 				}
 			},

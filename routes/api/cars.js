@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 const passport = require("passport");
 
 const Car = require("../../models/Car");
 
 const validateCarInput = require("../../validation/car");
+const validateCarInviteRideInput = require("../../validation/carinviteride");
 
 // @route   GET api/cars/test
 // @desc    Test Cars route
@@ -54,6 +55,31 @@ router.post(
     newCar.save().then(car => {
       res.json(car);
     });
+  }
+);
+
+// @route   POST api/cars/:carid/ride
+// @desc    Invite to car by name
+// @access  Private
+router.post(
+  "/:carid/ride",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateCarInviteRideInput(req.body);
+    if (!isValid) return res.status(400).json(errors);
+
+    Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .then(car => {
+        const newRide = {
+          name: req.body.name
+        };
+
+        // Add to experience array
+        car.rides.unshift(newRide);
+
+        car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
   }
 );
 
