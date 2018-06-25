@@ -77,10 +77,35 @@ router.post(
           name: req.body.name
         };
 
-        // Add to experience array
+        // Add to rides array
         car.rides.unshift(newRide);
 
         car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
+  }
+);
+
+// @route   POST api/cars/:carid/ride/:userid
+// @desc    Invite to car by userid
+// @access  Private
+router.post(
+  "/:carid/ride/:userid",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .then(car => {
+        User.findById(req.params.userid).then(user => {
+          const newRide = {
+            name: user.name,
+            user: user
+          };
+
+          // Add to rides array
+          car.rides.unshift(newRide);
+
+          car.save().then(car => res.json(car));
+        });
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
   }

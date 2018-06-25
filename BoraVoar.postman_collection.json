@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b37d5d26-cc31-4031-999c-e730385a720b",
+		"_postman_id": "8119bb38-a034-4680-a2b2-47a75dbda4f8",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -25,7 +25,7 @@
 						},
 						{
 							"key": "password",
-							"value": "1234",
+							"value": "123456",
 							"type": "text"
 						}
 					]
@@ -45,49 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "a51d38cd-5d7b-4e2e-940d-f35244098278",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"id": "7a482e67-2c69-4541-859f-0bae2246b67e",
+					"id": "e20b114a-7d32-4442-a9ad-ae0b40f2b014",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -164,6 +122,48 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
+				},
+				{
+					"id": "1ac0bb1c-ade4-4a43-8309-4ffcb389d831",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
 				}
 			]
 		},
@@ -564,7 +564,6 @@
 						{
 							"key": "name",
 							"value": "Artur",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -580,6 +579,34 @@
 						"cars",
 						"5b300253d6cc6323f88e5be1",
 						"ride"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Ride to Car by UserId (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride/5b2fe5c980d10435acffb02d",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b300253d6cc6323f88e5be1",
+						"ride",
+						"5b2fe5c980d10435acffb02d"
 					]
 				}
 			},
