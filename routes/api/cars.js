@@ -95,17 +95,21 @@ router.post(
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .then(car => {
-        User.findById(req.params.userid).then(user => {
-          const newRide = {
-            name: user.name,
-            user: user
-          };
+        User.findById(req.params.userid)
+          .then(user => {
+            const newRide = {
+              name: user.name,
+              user: user._id
+            };
 
-          // Add to rides array
-          car.rides.unshift(newRide);
+            // Add to rides array
+            car.rides.unshift(newRide);
 
-          car.save().then(car => res.json(car));
-        });
+            car.save().then(car => res.json(car));
+          })
+          .catch(err =>
+            res.status(404).json({ nouserfound: "User not found" })
+          );
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
   }
