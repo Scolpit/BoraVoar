@@ -18,7 +18,10 @@ router.get("/test", (req, res) => {
 // @desc    Get rides
 // @access  Public
 router.get("/", (req, res) => {
-  Ride.find({ date: { $gte: Date.now() } })
+  var now = new Date();
+  var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  Ride.find({ date: { $gte: dt } })
     .populate("user", ["name", "avatar"])
     .sort({ date: "asc" })
     .then(rides => res.json(rides))

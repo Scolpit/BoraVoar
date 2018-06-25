@@ -19,7 +19,10 @@ router.get("/test", (req, res) => {
 // @desc    Get cars
 // @access  Public
 router.get("/", (req, res) => {
-  Car.find({ date: { $gte: Date.now() } })
+  var now = new Date();
+  var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  Car.find({ date: { $gte: dt } })
     .sort({ date: "asc" })
     .then(cars => res.json(cars))
     .catch(err => res.status(404).json({ nocarsfound: "Cars not found" }));
