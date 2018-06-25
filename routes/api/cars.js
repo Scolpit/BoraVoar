@@ -78,7 +78,7 @@ router.post(
         };
 
         // Add to rides array
-        car.rides.unshift(newRide);
+        car.rides.push(newRide);
 
         car.save().then(car => res.json(car));
       })
@@ -103,7 +103,7 @@ router.post(
             };
 
             // Add to rides array
-            car.rides.unshift(newRide);
+            car.rides.push(newRide);
 
             car.save().then(car => res.json(car));
           })
