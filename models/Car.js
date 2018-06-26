@@ -17,7 +17,7 @@ const CarSchema = new Schema({
   chat: [
     {
       user: { type: Schema.Types.ObjectId, ref: "users" },
-      date: { type: Date, required: true },
+      date: { type: Date, default: Date.now },
       text: { type: String, required: true }
     }
   ]

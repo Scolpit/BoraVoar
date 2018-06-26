@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "d27ab0ea-861d-4f9f-affd-78ee60fbcea9",
+					"id": "ad0a2c45-55be-4e49-82d8-990742a06845",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -124,7 +124,7 @@
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
 				},
 				{
-					"id": "bd330ce0-99f2-4507-a5f7-1f42e9ae797d",
+					"id": "be544864-39e8-4e28-a14c-1f22b192421a",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -187,17 +187,17 @@
 						},
 						{
 							"key": "email",
-							"value": "scolpit5@gmail.com",
+							"value": "scolpit1@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "12345678",
+							"value": "123456",
 							"type": "text"
 						},
 						{
 							"key": "password2",
-							"value": "12345678",
+							"value": "123456",
 							"type": "text"
 						}
 					]
@@ -505,7 +505,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{url}}/api/cars/5b2ffe96c9151a0dc0ebd5a4",
+					"raw": "http://{{url}}/api/cars/5b31f1eed77d1833f0e72464",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -513,7 +513,7 @@
 					"path": [
 						"api",
 						"cars",
-						"5b2ffe96c9151a0dc0ebd5a4"
+						"5b31f1eed77d1833f0e72464"
 					]
 				}
 			},
@@ -624,7 +624,35 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride/5b2fe5c980d10435acffb02d",
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f8e5be1/ride/5b315b546d9ef92e50006fce",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b300253d6cc6323f8e5be1",
+						"ride",
+						"5b315b546d9ef92e50006fce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark car as Full (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/markfull",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -633,8 +661,99 @@
 						"api",
 						"cars",
 						"5b300253d6cc6323f88e5be1",
-						"ride",
-						"5b2fe5c980d10435acffb02d"
+						"markfull"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark car as not Full (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/unmarkfull",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b300253d6cc6323f88e5be1",
+						"unmarkfull"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post on chat (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "text",
+							"value": "sexto chat",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b31f1eed77d1833f0e72464/chat",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b31f1eed77d1833f0e72464",
+						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Chat (P)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b31f1eed77d1833f0e72464/chat/5b32a694ee3c521b9425c6c9",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b31f1eed77d1833f0e72464",
+						"chat",
+						"5b32a694ee3c521b9425c6c9"
 					]
 				}
 			},

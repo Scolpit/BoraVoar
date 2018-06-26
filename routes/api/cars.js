@@ -139,6 +139,60 @@ router.post(
   }
 );
 
+// @route   POST api/cars/:carid/markfull
+// @desc    Mark car as full
+// @access  Private
+router.post(
+  "/:carid/markfull",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .then(car => {
+        car.full = true;
+        car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
+  }
+);
+
+// @route   POST api/cars/:carid/unmarkfull
+// @desc    Mark car as not full
+// @access  Private
+router.post(
+  "/:carid/unmarkfull",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .then(car => {
+        car.full = false;
+        car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
+  }
+);
+
+// @route   POST api/cars/:carid/chat
+// @desc    Post chat
+// @access  Private
+router.post(
+  "/:carid/chat",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid })
+      .then(car => {
+        const newChat = {
+          user: req.user._id,
+          text: req.body.text
+        };
+
+        // Add to rides array
+        car.chat.push(newChat);
+        car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
+  }
+);
+
 // @route   DELETE api/cars/:carid/ride/:rideid
 // @desc    Delete ride from car
 // @access  Private
@@ -159,6 +213,39 @@ router.delete(
         car.rides.splice(removeIndex, 1);
 
         car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
+  }
+);
+
+// @route   DELETE api/cars/:carid/chat/:chatid
+// @desc    Delete chat from car
+// @access  Private
+router.delete(
+  "/:carid/chat/:chatid",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid })
+      .then(car => {
+        const removeIndex = car.chat
+          .map(item => item.id)
+          .indexOf(req.params.chatid);
+
+        if (removeIndex == -1) {
+          return res.json({ chatnotfound: "Mensagem não encontrada" });
+        }
+
+        //Only car owner or message owner can delete message
+        if (
+          car.user == req.user.id ||
+          car.chat[removeIndex].user == req.user.id
+        ) {
+          car.chat.splice(removeIndex, 1);
+
+          car.save().then(car => res.json(car));
+        } else {
+          return res.json({ messageotherperson: "Not authorized" });
+        }
       })
       .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
   }
