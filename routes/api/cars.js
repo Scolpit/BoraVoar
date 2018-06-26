@@ -97,15 +97,25 @@ router.post(
       .then(car => {
         User.findById(req.params.userid)
           .then(user => {
-            const newRide = {
-              name: user.name,
-              user: user._id
-            };
+            //Check if pilot is already added to car
+            ridenotexist =
+              car.rides.find(el => {
+                return el.user == req.params.userid;
+              }) == null;
 
-            // Add to rides array
-            car.rides.push(newRide);
+            if (ridenotexist) {
+              const newRide = {
+                name: user.name,
+                user: user._id
+              };
 
-            car.save().then(car => res.json(car));
+              // Add to rides array
+              car.rides.push(newRide);
+
+              car.save().then(car => res.json(car));
+            } else {
+              res.status(404).json({ fbm_error: "Piloto já adicionado" });
+            }
           })
           .catch(err =>
             res.status(404).json({ nouserfound: "User not found" })
