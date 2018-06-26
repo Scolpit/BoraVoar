@@ -73,16 +73,28 @@ router.post(
 
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .then(car => {
-        const newRide = {
-          name: req.body.name
-        };
+        //Check if pilot is already added to car
+        ridenotexist =
+          car.rides.find(el => {
+            return el.name == req.body.name;
+          }) == null;
 
-        // Add to rides array
-        car.rides.push(newRide);
+        if (ridenotexist) {
+          const newRide = {
+            name: req.body.name
+          };
 
-        car.save().then(car => res.json(car));
+          // Add to rides array
+          car.rides.push(newRide);
+
+          car.save().then(car => res.json(car));
+        } else {
+          res.status(404).json({ nocarsfound: "Piloto já adicionado" });
+        }
       })
-      .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
+      .catch(err =>
+        res.status(404).json({ useralreadyadded: "Car not found" })
+      );
   }
 );
 
@@ -114,7 +126,9 @@ router.post(
 
               car.save().then(car => res.json(car));
             } else {
-              res.status(404).json({ fbm_error: "Piloto já adicionado" });
+              return res
+                .status(404)
+                .json({ fbm_error: "Piloto já adicionado" });
             }
           })
           .catch(err =>
@@ -122,6 +136,31 @@ router.post(
           );
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
+  }
+);
+
+// @route   DELETE api/cars/:carid/ride/:rideid
+// @desc    Delete ride from car
+// @access  Private
+router.delete(
+  "/:carid/ride/:rideid",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .then(car => {
+        const removeIndex = car.rides
+          .map(item => item.id)
+          .indexOf(req.params.rideid);
+
+        if (removeIndex == -1) {
+          return res.json({ ridenotfound: "Piloto não encontrado" });
+        }
+
+        car.rides.splice(removeIndex, 1);
+
+        car.save().then(car => res.json(car));
+      })
+      .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
   }
 );
 

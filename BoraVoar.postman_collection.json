@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "c08d3c0a-c401-48b7-a8b2-ed0e2464e4af",
+					"id": "d27ab0ea-861d-4f9f-affd-78ee60fbcea9",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -124,7 +124,7 @@
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
 				},
 				{
-					"id": "64d0db35-15bd-4475-91dc-5ef860e24795",
+					"id": "bd330ce0-99f2-4507-a5f7-1f42e9ae797d",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -588,6 +588,34 @@
 			"name": "Add Ride to Car by UserId (P)",
 			"request": {
 				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride/5b2fe5c980d10435acffb02d",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"5b300253d6cc6323f88e5be1",
+						"ride",
+						"5b2fe5c980d10435acffb02d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ride from Car (P)",
+			"request": {
+				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
