@@ -8,13 +8,6 @@ const Car = require("../../models/Car");
 const validateCarInput = require("../../validation/car");
 const validateCarInviteRideInput = require("../../validation/carinviteride");
 
-// @route   GET api/cars/test
-// @desc    Test Cars route
-// @access  Public
-router.get("/test", (req, res) => {
-  res.json({ msg: "Cars router works!" });
-});
-
 // @route   GET api/cars
 // @desc    Get cars
 // @access  Public

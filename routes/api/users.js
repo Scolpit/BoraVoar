@@ -11,13 +11,6 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
-// @route   GET api/users/test
-// @desc    Test users route
-// @access  Public
-router.get("/test", (req, res) => {
-  res.json({ msg: "users router works!" });
-});
-
 // @route   POST api/users/register
 // @desc    Register user
 // @access  Public
@@ -85,14 +78,12 @@ router.post("/login", (req, res) => {
 
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
-        // res.json({ msg: "Success" });
-
         const payload = { id: user.id, name: user.name, avatar: user.avatar };
 
         jwt.sign(
           payload,
           configKeys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 7776000 },
           (err, token) => {
             if (err) throw err;
             res.json({

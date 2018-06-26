@@ -7,13 +7,6 @@ const Ride = require("../../models/Ride");
 
 const validateRideInput = require("../../validation/ride");
 
-// @route   GET api/rides/test
-// @desc    Test Ride route
-// @access  Public
-router.get("/test", (req, res) => {
-  res.json({ msg: "rides router works!" });
-});
-
 // @route   GET api/rides
 // @desc    Get rides
 // @access  Public
