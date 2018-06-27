@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8119bb38-a034-4680-a2b2-47a75dbda4f8",
+		"_postman_id": "e66835bf-ce32-4c5d-bed6-a6b6d01b36b3",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,49 @@
 			},
 			"response": [
 				{
-					"id": "ad0a2c45-55be-4e49-82d8-990742a06845",
+					"id": "7feb43b3-6afc-4ec6-912c-2f383d472145",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"id": "53829b2e-08a3-4da7-adf7-243b7cc1f6e9",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -122,48 +164,6 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
-				},
-				{
-					"id": "be544864-39e8-4e28-a14c-1f22b192421a",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
 				}
 			]
 		},
@@ -212,6 +212,54 @@
 						"api",
 						"users",
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password (P)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "oldpassword",
+							"value": "123",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "newpassword",
+							"value": "1234567",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "newpassword2",
+							"value": "1234567",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/users/changepassword",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"changepassword"
 					]
 				}
 			},
@@ -594,7 +642,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride/5b2fe5c980d10435acffb02d",
 					"protocol": "http",
@@ -622,7 +673,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f8e5be1/ride/5b315b546d9ef92e50006fce",
 					"protocol": "http",
@@ -650,7 +704,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/markfull",
 					"protocol": "http",
@@ -677,7 +734,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/unmarkfull",
 					"protocol": "http",
@@ -710,7 +770,6 @@
 						{
 							"key": "text",
 							"value": "sexto chat",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -741,7 +800,10 @@
 						"value": "{{token}}"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://{{url}}/api/cars/5b31f1eed77d1833f0e72464/chat/5b32a694ee3c521b9425c6c9",
 					"protocol": "http",

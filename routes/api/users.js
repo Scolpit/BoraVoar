@@ -113,7 +113,7 @@ router.post("/changepassword", (req, res) => {
 
   const { oldpassword, newpassword } = req.body;
 
-  User.findById({ _id: req.user.id }).then(user => {
+  User.findById(req.user.id).then(user => {
     if (!user) {
       errors.email = "User not found";
       return res.status(404).json(errors);
