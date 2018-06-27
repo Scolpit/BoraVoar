@@ -18,7 +18,8 @@ module.exports = function validateChangePasswordInput(data) {
   }
 
   if (!Validator.isLength(data.newpassword, { min: 6, max: 30 })) {
-    errors.newpassword = "Nova password deve ter no mínimo 6 caracteres";
+    errors.newpassword =
+      "Nova password deve ter no mínimo 6 caracteres (max:30)";
   }
 
   if (Validator.isEmpty(data.newpassword2)) {

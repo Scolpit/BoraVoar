@@ -10,6 +10,7 @@ const passport = require("passport");
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateChangePasswordInput = require("../../validation/changepassword");
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -77,6 +78,48 @@ router.post("/login", (req, res) => {
     }
 
     bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        const payload = { id: user.id, name: user.name, avatar: user.avatar };
+
+        jwt.sign(
+          payload,
+          configKeys.secretOrKey,
+          { expiresIn: 7776000 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        errors.password = "Invalid password";
+        return res.status(404).json(errors);
+      }
+    });
+  });
+});
+
+// @route   POST api/users/changepassword
+// @desc    Login user / return token
+// @access  Public
+router.post("/changepassword", (req, res) => {
+  const { errors, isValid } = validateChangePasswordInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const { oldpassword, newpassword, newpassword2 } = req.body;
+
+  User.findById({ _id: req.user.id }).then(user => {
+    if (!user) {
+      errors.email = "User not found";
+      return res.status(404).json(errors);
+    }
+
+    bcrypt.compare(oldpassword, user.password).then(isMatch => {
       if (isMatch) {
         const payload = { id: user.id, name: user.name, avatar: user.avatar };
 
