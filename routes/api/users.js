@@ -103,46 +103,50 @@ router.post("/login", (req, res) => {
 
 // @route   POST api/users/changepassword
 // @desc    Login user / return token
-// @access  Public
-router.post("/changepassword", (req, res) => {
-  const { errors, isValid } = validateChangePasswordInput(req.body);
+// @access  Private
+router.post(
+  "/changepassword",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateChangePasswordInput(req.body);
 
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  const { oldpassword, newpassword } = req.body;
-
-  User.findById(req.user.id).then(user => {
-    if (!user) {
-      errors.email = "User not found";
-      return res.status(404).json(errors);
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
-    bcrypt.compare(oldpassword, user.password).then(isMatch => {
-      if (isMatch) {
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newpassword, salt, (err, hash) => {
-            if (err) throw err;
+    const { oldpassword, newpassword } = req.body;
 
-            user.password = hash;
-            user
-              .save()
-              .then(user => {
-                res.json(user);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          });
-        });
-      } else {
-        errors.password = "Invalid password";
+    User.findById(req.user.id).then(user => {
+      if (!user) {
+        errors.email = "User not found";
         return res.status(404).json(errors);
       }
+
+      bcrypt.compare(oldpassword, user.password).then(isMatch => {
+        if (isMatch) {
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newpassword, salt, (err, hash) => {
+              if (err) throw err;
+
+              user.password = hash;
+              user
+                .save()
+                .then(user => {
+                  return res.json(user);
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            });
+          });
+        } else {
+          errors.password = "Invalid password";
+          return res.status(404).json(errors);
+        }
+      });
     });
-  });
-});
+  }
+);
 
 // @route   GET api/users/current
 // @desc    Return current user
