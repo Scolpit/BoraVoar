@@ -111,7 +111,7 @@ router.post("/changepassword", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const { oldpassword, newpassword, newpassword2 } = req.body;
+  const { oldpassword, newpassword } = req.body;
 
   User.findById({ _id: req.user.id }).then(user => {
     if (!user) {
@@ -121,20 +121,21 @@ router.post("/changepassword", (req, res) => {
 
     bcrypt.compare(oldpassword, user.password).then(isMatch => {
       if (isMatch) {
-        const payload = { id: user.id, name: user.name, avatar: user.avatar };
-
-        jwt.sign(
-          payload,
-          configKeys.secretOrKey,
-          { expiresIn: 7776000 },
-          (err, token) => {
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newpassword, salt, (err, hash) => {
             if (err) throw err;
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
+
+            user.password = hash;
+            user
+              .save()
+              .then(user => {
+                res.json(user);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          });
+        });
       } else {
         errors.password = "Invalid password";
         return res.status(404).json(errors);
