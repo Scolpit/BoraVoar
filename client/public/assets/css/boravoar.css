@@ -43,3 +43,12 @@ body {
   color: #1b8bf9;
   font-size: 40px;
 }
+
+/* TextFieldGoogleGroup */
+.invalid-feedback {
+  color: red;
+  margin-top: -20px;
+  margin-left: 5px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
