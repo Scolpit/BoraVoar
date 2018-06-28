@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import { registerUser } from "../../actions/authActions";
 import TextFieldGoogleGroup from "../common/TextFieldGoogleGroup";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-export class Login extends Component {
+export class Register extends Component {
   constructor() {
     super();
     this.state = {
+      name: "",
       email: "",
       password: "",
+      password2: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -40,16 +43,18 @@ export class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const userData = {
+    const newUser = {
+      name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     };
 
-    this.props.loginUser(userData);
+    this.props.registerUser(newUser, this.props.history);
   }
 
   static propTypes = {
-    loginUser: PropTypes.func.isRequired,
+    registerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
   };
@@ -68,8 +73,15 @@ export class Login extends Component {
                     <b>B</b>ora
                     <b>V</b>oar
                   </div>
-                  <h3 className="text-center txt-primary">Login</h3>
+                  <h3 className="text-center txt-primary">Registo</h3>
                   <form noValidate onSubmit={this.onSubmit}>
+                    <TextFieldGoogleGroup
+                      label="Nome"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.onChange}
+                      error={errors.name}
+                    />
                     <TextFieldGoogleGroup
                       label="Email"
                       name="email"
@@ -85,6 +97,14 @@ export class Login extends Component {
                       onChange={this.onChange}
                       error={errors.password}
                     />
+                    <TextFieldGoogleGroup
+                      label="Confirmação de password"
+                      name="password2"
+                      type="password"
+                      value={this.state.password2}
+                      onChange={this.onChange}
+                      error={errors.password2}
+                    />
 
                     <div className="row">
                       <div className="col-xs-10 offset-xs-1">
@@ -92,17 +112,16 @@ export class Login extends Component {
                           type="submit"
                           className="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
                         >
-                          LOGIN
+                          Registar
                         </button>
                       </div>
                     </div>
                   </form>
-
                   <div className="row">
                     <div className="col-sm-12 col-xs-12 text-center m-b-20">
-                      <span className="text-muted">Não tem conta?</span>
-                      <Link to="/Register" className="f-w-600 p-l-5">
-                        Registe-se
+                      <span className="text-muted">Já tem conta?</span>
+                      <Link to="/" className="f-w-600 p-l-5">
+                        Faça Login
                       </Link>
                     </div>
                   </div>
@@ -134,5 +153,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
-)(Login);
+  { registerUser }
+)(withRouter(Register));

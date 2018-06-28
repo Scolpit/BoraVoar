@@ -12,6 +12,7 @@ import store from "./store";
 
 //Routes
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 import "./App.css";
 
@@ -33,7 +34,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={Login} />
+          <div className="app">
+            <Route exact path="/" component={Login} />
+            <Route exact path="/Register" component={Register} />
+          </div>
         </Router>
       </Provider>
     );
