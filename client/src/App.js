@@ -13,6 +13,7 @@ import store from "./store";
 //Routes
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Navbar from "./components/layout/Navbar";
 
 import "./App.css";
 
@@ -37,6 +38,7 @@ class App extends Component {
           <div className="app">
             <Route exact path="/" component={Login} />
             <Route exact path="/Register" component={Register} />
+            <Route exact path="/Navbar" component={Navbar} />
           </div>
         </Router>
       </Provider>

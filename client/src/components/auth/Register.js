@@ -7,6 +7,12 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 export class Register extends Component {
+  static propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+  };
+
   constructor() {
     super();
     this.state = {
@@ -52,12 +58,6 @@ export class Register extends Component {
 
     this.props.registerUser(newUser, this.props.history);
   }
-
-  static propTypes = {
-    registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
-  };
 
   render() {
     const { errors } = this.state;
