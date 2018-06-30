@@ -5,5 +5,9 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 //authReducer
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-//commonReducer
-export const SET_ACTIVE_MENU = "SET_ACTIVE_MENU";
+//CommonReducer
+export const SET_LOADING = "SET_LOADING";
+
+//carReducer
+export const GET_CAR = "GET_CAR";
+export const GET_CARS = "GET_CARS";

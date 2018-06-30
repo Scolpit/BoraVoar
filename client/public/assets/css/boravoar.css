@@ -44,6 +44,10 @@ body {
   font-size: 40px;
 }
 
+.bv_displaynone {
+  display: none;
+}
+
 /* TextFieldGoogleGroup */
 .invalid-feedback {
   color: red;

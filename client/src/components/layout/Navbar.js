@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
+import classnames from "classnames";
 
 import MenuItem from "./MenuItem";
 
 export class Navbar extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
+    logoutUser: PropTypes.func.isRequired,
     activeMenu: PropTypes.string.isRequired,
-    logoutUser: PropTypes.func.isRequired
+    auth: PropTypes.object.isRequired,
+    common: PropTypes.object.isRequired
   };
 
   toggleMenu() {
@@ -45,6 +47,7 @@ export class Navbar extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
     const { activeMenu } = this.props;
+    const { loading } = this.props.common;
 
     const userName = isAuthenticated ? user.name : "Convidado";
     const avatar = isAuthenticated
@@ -81,7 +84,7 @@ export class Navbar extends Component {
 
     return (
       <div className="boravoar_navbar">
-        <div className="loader-bg">
+        <div className={classnames("loader-bg", { bv_displaynone: !loading })}>
           <div className="loader-bar" />
         </div>
         <div className="wrapper">
@@ -190,7 +193,8 @@ export class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  common: state.common
 });
 
 export default connect(
