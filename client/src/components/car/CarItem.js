@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import classnames from "classnames";
 
 export class CarItem extends Component {
   static propTypes = {
@@ -10,8 +11,15 @@ export class CarItem extends Component {
   };
 
   render() {
+    const { editable, car } = this.props;
+
     return (
-      <div className="col-xl-6 col-lg-12">
+      <div
+        className={classnames("col-lg-12", {
+          "col-xl-6": editable,
+          "col-xl-4": !editable
+        })}
+      >
         <div className="card">
           <div className="user-block-2">
             <img
@@ -19,17 +27,17 @@ export class CarItem extends Component {
               src="assets/images/widget/user-1.png"
               alt="user-header"
             />
-            <h5>Josephin Villa</h5>
-            <h5>2018-06-15</h5>
+            <h5>{car.user.name}</h5>
+            <h5>{car.date}</h5>
             <div>
               <div className="inline-block">
-                <h6>Lisboa</h6>
+                <h6>{car.from}</h6>
               </div>
               <div className="inline-block p-l-5 p-r-5">
                 <i className="fas fa-arrow-right" />
               </div>
               <div className="inline-block">
-                <h6>Castelo de Vide</h6>
+                <h6>{car.to}</h6>
               </div>
             </div>
             <div className="padding-20">

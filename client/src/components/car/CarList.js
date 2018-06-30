@@ -27,7 +27,9 @@ export class CarList extends Component {
     if (cars === null || loading) {
       carList = <div />;
     } else {
-      carList = cars.map(car => <CarItem key={car._id} car={car} />);
+      carList = cars.map(car => (
+        <CarItem key={car._id} car={car} editable="false" />
+      ));
     }
 
     return (
