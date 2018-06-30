@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import classnames from "classnames";
+import { logoutUser } from "../../actions/authActions";
+
+import MenuItem from "./MenuItem";
 
 export class Navbar extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired
-    //activeMenu: PropTypes.string.isRequired
+    auth: PropTypes.object.isRequired,
+    activeMenu: PropTypes.string.isRequired,
+    logoutUser: PropTypes.func.isRequired
   };
 
   toggleMenu() {
@@ -35,9 +38,46 @@ export class Navbar extends Component {
             );
   }
 
+  logoutUser() {
+    this.props.logoutUser();
+  }
+
   render() {
-    const { user } = this.props.auth;
+    const { user, isAuthenticated } = this.props.auth;
     const { activeMenu } = this.props;
+
+    const userName = isAuthenticated ? user.name : "Convidado";
+    const avatar = isAuthenticated
+      ? user.avatar
+      : "assets/images/widget/user-1.png";
+
+    const subMenuItems = isAuthenticated ? (
+      <div>
+        <li>
+          <Link to="/Profile">
+            <i className="fas fa-user" /> Perfil
+          </Link>
+        </li>
+        <li>
+          <a onClick={this.logoutUser.bind(this)}>
+            <i className="fas fa-power-off" /> Logout
+          </a>
+        </li>
+      </div>
+    ) : (
+      <div>
+        <li>
+          <Link to="/">
+            <i className="fas fa-user" /> Login
+          </Link>
+        </li>
+        <li>
+          <Link to="/Register">
+            <i class="fas fa-sign-in-alt" /> Register
+          </Link>
+        </li>
+      </div>
+    );
 
     return (
       <div className="boravoar_navbar">
@@ -82,27 +122,18 @@ export class Navbar extends Component {
                       <span>
                         <img
                           className="img-circle "
-                          src="assets/images/avatar-1.png"
+                          src={avatar}
                           style={{ width: "40px" }}
                           alt=""
                         />
                       </span>
                       <span>
-                        <span class="p-l-10 p-r-10">John Doei</span>
+                        <span className="p-l-10 p-r-10">{userName}</span>
                         <i className="fas fa-angle-down" />
                       </span>
                     </a>
                     <ul className="dropdown-menu settings-menu">
-                      <li>
-                        <a href="profile.html">
-                          <i className="fas fa-user" /> Profile
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#!">
-                          <i className="fas fa-power-off" /> Logout
-                        </a>
-                      </li>
+                      {subMenuItems}
                     </ul>
                   </li>
                 </ul>
@@ -114,60 +145,41 @@ export class Navbar extends Component {
             <div className="sidebar" id="sidebar-scroll">
               <div className="user-panel">
                 <div className="f-left image">
-                  <img
-                    src="assets/images/avatar-1.png"
-                    className="img-circle"
-                    alt=""
-                  />
+                  <img src={avatar} className="img-circle" alt="" />
                 </div>
                 <div className="f-left info">
-                  <p>John Doe</p>
+                  <p>{userName}</p>
                 </div>
               </div>
 
               <ul className="sidebar-menu">
                 <li className="nav-level">Menu</li>
-                <li
-                  className={classnames("treeview", {
-                    active: activeMenu == "CarList"
-                  })}
-                >
-                  <Link className="waves-effect waves-dark" to="CarList">
-                    <i className="fas fa-car" />
-                    <span> Viaturas</span>
-                  </Link>
-                </li>
-                <li
-                  className={classnames("treeview", {
-                    active: activeMenu == "RideList"
-                  })}
-                >
-                  <Link className="waves-effect waves-dark" to="RideList">
-                    <i className="fas fa-parachute-box" />
-                    <span> Pedidos</span>
-                  </Link>
-                </li>
+
+                <MenuItem
+                  to="CarList"
+                  name="Viaturas"
+                  icon="fas fa-car"
+                  activeMenu={activeMenu}
+                />
+                <MenuItem
+                  to="RideList"
+                  name="Pedidos"
+                  icon="fas fa-parachute-box"
+                  activeMenu={activeMenu}
+                />
                 <li className="nav-level">Criar</li>
-                <li
-                  className={classnames("treeview", {
-                    active: activeMenu == "CarCreate"
-                  })}
-                >
-                  <Link className="waves-effect waves-dark" to="CarCreate">
-                    <i className="fas fa-car" />
-                    <span> Criar Viatura</span>
-                  </Link>
-                </li>
-                <li
-                  className={classnames("treeview", {
-                    active: activeMenu == "RideCreate"
-                  })}
-                >
-                  <Link className="waves-effect waves-dark" to="RideCreate">
-                    <i className="fas fa-parachute-box" />
-                    <span> Pedir boleia</span>
-                  </Link>
-                </li>
+                <MenuItem
+                  to="CarCreate"
+                  name="Criar Viatura"
+                  icon="fas fa-car"
+                  activeMenu={activeMenu}
+                />
+                <MenuItem
+                  to="RideCreate"
+                  name="Pedir boleia"
+                  icon="fas fa-parachute-box"
+                  activeMenu={activeMenu}
+                />
               </ul>
             </div>
           </div>
@@ -181,4 +193,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);

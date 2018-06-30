@@ -7,6 +7,7 @@ const CarSchema = new Schema({
   date: { type: Date, required: true },
   from: { type: String, required: true, max: 30 },
   to: { type: String, required: true, max: 30 },
+  description: { type: String, required: true, min: 10, max: 2000 },
   full: { type: Boolean, default: false },
   rides: [
     {

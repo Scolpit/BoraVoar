@@ -2,33 +2,31 @@ import React from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
-const TextFieldGroup = ({
-  label,
+const TextAreaFieldGroup = ({
   name,
+  label,
   placeholder,
   value,
   error,
   info,
-  type,
-  onChange,
-  disabled
+  rows,
+  onChange
 }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name} className="form-control-label">
+      <label htmlFor={value} className="form-control-label">
         {label}
       </label>
-      <input
-        type={type}
-        htmlFor={name}
+      <textarea
         className={classnames("form-control", {
           "is-invalid": error
         })}
         placeholder={placeholder}
+        htmlFor={value}
         name={name}
+        rows={rows}
         value={value}
         onChange={onChange}
-        disabled={disabled}
       />
       {error && <div className="invalid-feedback p-t-20">{error}</div>}
       {info && <small className="form-text text-muted">{info}</small>}
@@ -36,20 +34,19 @@ const TextFieldGroup = ({
   );
 };
 
-TextFieldGroup.propTypes = {
+TextAreaFieldGroup.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
+  rows: PropTypes.number,
   error: PropTypes.string,
   info: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.string
+  onChange: PropTypes.func.isRequired
 };
 
-TextFieldGroup.defaultProps = {
-  type: "text"
+TextAreaFieldGroup.defaultProps = {
+  rows: 6
 };
 
-export default TextFieldGroup;
+export default TextAreaFieldGroup;
