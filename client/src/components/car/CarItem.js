@@ -22,23 +22,27 @@ export class CarItem extends Component {
     super(props);
 
     this.state = {
-      username: "teste"
+      username: ""
     };
 
-    // this.onDeleteCar = this.onDeleteCar.bind(this);
-    // this.onMarkAsFull = this.onMarkAsFull.bind(this);
+    this.onDeleteCar = this.onDeleteCar.bind(this);
+    this.onMarkAsFull = this.onMarkAsFull.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
-    console.log(e.target.name);
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.car) {
+  //     this.setState({ car: nextProps.car });
+  //   }
+  // }
+
   onSubmit(e) {
     e.preventDefault();
-
-    console.log(this.state.username);
 
     const userData = {
       name: this.state.username
