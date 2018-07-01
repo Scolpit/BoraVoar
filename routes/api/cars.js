@@ -28,6 +28,7 @@ router.get("/", (req, res) => {
 // @access  Public
 router.get("/:id", (req, res) => {
   Car.findById(req.params.id)
+    .populate("user", ["name", "avatar"])
     .then(car => res.json(car))
     .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
 });

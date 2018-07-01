@@ -10,7 +10,7 @@ const MenuItem = ({ activeMenu, to, icon, name }) => {
         active: activeMenu === to
       })}
     >
-      <Link className="waves-effect waves-dark" to={to}>
+      <Link className="waves-effect waves-dark" to={`/${to}`}>
         <i className={icon} />
         <span> {name}</span>
       </Link>

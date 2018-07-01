@@ -22,16 +22,16 @@ export class CarDetails extends Component {
     const { loading } = this.props.common;
 
     let carDetails;
-    if (car === null || loading) {
+    if (car === null || loading || Object.keys(car).length === 0) {
       carDetails = <div />;
     } else {
-      carDetails = <div />;
-      //carDetails = <CarItem car={car} editable={true} />;
+      console.log(car._id);
+      carDetails = <CarItem car={car} editable={true} />;
     }
 
     return (
       <div>
-        <NavBar activeMenu="CarList" />
+        <NavBar activeMenu="CarDetails" />
         <div className="content-wrapper">
           <div className="container-fluid">
             <div className="row">
