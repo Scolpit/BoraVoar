@@ -19,6 +19,12 @@ export class CarList extends Component {
     this.props.getCars();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   render() {
     const { cars } = this.props.car;
     const { loading } = this.props.common;
@@ -28,7 +34,7 @@ export class CarList extends Component {
       carList = <div />;
     } else {
       carList = cars.map(car => (
-        <CarItem key={car._id} car={car} editable="false" />
+        <CarItem key={car._id} car={car} editable={false} />
       ));
     }
 

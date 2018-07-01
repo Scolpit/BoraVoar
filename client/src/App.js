@@ -15,6 +15,7 @@ import Register from "./components/auth/Register";
 import CarList from "./components/car/CarList";
 import CarCreate from "./components/car/CarCreate";
 import RideCreate from "./components/ride/RideCreate";
+import CarDetails from "./components/car/CarDetails";
 
 import "./App.css";
 
@@ -40,6 +41,7 @@ class App extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/CarList" component={CarList} />
+            <Route exact path="/CarDetails/:id" component={CarDetails} />
             <Switch>
               <PrivateRoute exact path="/CarCreate" component={CarCreate} />
             </Switch>

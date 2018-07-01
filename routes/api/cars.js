@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
 
   Car.find({ date: { $gte: dt } })
     .populate("user", ["name", "avatar"])
+    .populate("rides")
     .sort({ date: "asc" })
     .then(cars => res.json(cars))
     .catch(err => res.status(404).json({ nocarsfound: "Cars not found" }));

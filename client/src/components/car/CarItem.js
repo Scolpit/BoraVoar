@@ -2,16 +2,120 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import Moment from "react-moment";
+import { Link } from "react-router-dom";
+
+import CarItemUser from "./CarItemUser";
+
+import { addRideToCarByName } from "../../actions/carActions";
 
 export class CarItem extends Component {
   static propTypes = {
     errors: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     car: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired
+    editable: PropTypes.bool.isRequired,
+    addRideToCarByName: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: ""
+    };
+
+    this.onDeleteCar = this.onDeleteCar.bind(this);
+    this.onAddRider = this.onDeleteCar.bind(this);
+    this.onMarkAsFull = this.onDeleteCar.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const userName = {
+      name: this.state.username
+    };
+
+    this.props.addRideToCarByName(this.props.car._id, userName);
+  }
+
+  onDeleteCar() {
+    //TODO
+  }
+
+  onAddRider() {}
+
+  onMarkAsFull() {
+    //TODO
+  }
+
   render() {
-    const { editable, car } = this.props;
+    const { editable, car, auth } = this.props;
+    const carOwner = editable && car.user._id === auth.user.id;
+
+    //Bottom buttons
+    let carButtons = "";
+    if (!editable) {
+      carButtons = (
+        <Link
+          type="link"
+          to={`/CarDetails/${car._id}`}
+          className="m-l-20 btn btn-primary waves-effect waves-light text-uppercase"
+        >
+          Detalhes
+        </Link>
+      );
+    }
+    if (carOwner) {
+      carButtons = (
+        <div>
+          <button
+            type="button"
+            onClick={this.onMarkAsFull}
+            className="btn btn-success waves-effect waves-light text-uppercase"
+          >
+            Marcar como {car.full ? "vazio" : "cheio"}
+          </button>
+          <button
+            type="button"
+            onClick={this.onDeleteCar}
+            className="m-l-20 btn btn-danger waves-effect waves-light text-uppercase"
+          >
+            Eliminar viatura
+          </button>
+        </div>
+      );
+    }
+
+    //UserList
+    let rideList;
+    if (!editable) {
+      rideList = (
+        <CarItemUser
+          icon="fas fa-users"
+          name={`${car.rides.length} pessoa${
+            car.rides.length === 1 ? "" : "s"
+          }`}
+          showDelete={false}
+        />
+      );
+    } else {
+      rideList = car.rides.map(ride => (
+        <CarItemUser
+          key={ride._id}
+          icon="fas fa-user"
+          name={ride.name}
+          showDelete={carOwner}
+          carid={car._id}
+          rideid={ride._id}
+        />
+      ));
+    }
 
     return (
       <div
@@ -24,11 +128,13 @@ export class CarItem extends Component {
           <div className="user-block-2">
             <img
               className="img-fluid"
-              src="assets/images/widget/user-1.png"
+              src={car.user.avatar}
               alt="user-header"
             />
             <h5>{car.user.name}</h5>
-            <h5>{car.date}</h5>
+            <h5>
+              <Moment format="DD/MM/YYYY">{car.date}</Moment>
+            </h5>
             <div>
               <div className="inline-block">
                 <h6>{car.from}</h6>
@@ -41,74 +147,40 @@ export class CarItem extends Component {
               </div>
             </div>
             <div className="padding-20">
-              <p className="text-white">
-                O objectio é sair do AKI do montijo por volta das 8 da manhã,
-                não se atrasem se não ficam atrás. Depois as despesas são
-                repartidas por X e Y para ser mais facil para todos e tal e
-                coiso e já não tenho mais imaginação para criar um texto grande
-              </p>
+              <p className="text-white">{car.description}</p>
             </div>
           </div>
 
           <div className="card-block">
-            <div className="user-block-2-activities">
-              <div className="user-block-2-active">
-                <i className="fas fa-user" /> Nuno Morgado
-                <button
-                  type="button"
-                  className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-            <div className="user-block-2-activities">
-              <div className="user-block-2-active">
-                <i className="fas fa-user" /> José António
-                <button
-                  type="button"
-                  className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-
-            <div className="user-block-2-activities">
-              <div className="form-group row">
-                <div className="col-sm-8 col-xs-6">
-                  <input
-                    className="form-control"
-                    placeholder="Nuno Morgado"
-                    type="text"
-                    id="example-text-input"
-                  />
-                </div>
-                <div className="col-sm-4">
-                  <button
-                    type="button"
-                    className="btn btn-primary waves-effect waves-light text-uppercase float-right margin-top--2"
-                  >
-                    Adicionar
-                  </button>
+            {rideList}
+            {carOwner && (
+              <div className="user-block-2-activities">
+                <div className="form-group row">
+                  <form onSubmit={this.onSubmit}>
+                    <div className="col-sm-8 col-xs-6">
+                      <input
+                        className="form-control"
+                        placeholder="Nuno Morgado"
+                        type="text"
+                        value={this.state.username}
+                        onChange={this.onChange}
+                        name="username"
+                      />
+                    </div>
+                    <div className="col-sm-4">
+                      <button
+                        type="submit"
+                        className="btn btn-primary waves-effect waves-light text-uppercase float-right margin-top--2"
+                      >
+                        Adicionar
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </div>
+            )}
 
-            <div className="text-center">
-              <button
-                type="button"
-                className="btn btn-success waves-effect waves-light text-uppercase"
-              >
-                Marcar como cheio
-              </button>
-              <button
-                type="button"
-                className="m-l-20 btn btn-danger waves-effect waves-light text-uppercase"
-              >
-                Eliminar viatura
-              </button>
-            </div>
+            <div className="text-center">{carButtons}</div>
           </div>
         </div>
       </div>
@@ -121,7 +193,11 @@ CarItem.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps)(CarItem);
+export default connect(
+  mapStateToProps,
+  { addRideToCarByName }
+)(CarItem);
