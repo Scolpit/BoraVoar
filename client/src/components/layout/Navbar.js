@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
-import classnames from "classnames";
 
 import MenuItem from "./MenuItem";
 
@@ -47,7 +46,6 @@ export class Navbar extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
     const { activeMenu } = this.props;
-    const { loading } = this.props.common;
 
     const userName = isAuthenticated ? user.name : "Convidado";
     const avatar = isAuthenticated
@@ -84,7 +82,8 @@ export class Navbar extends Component {
 
     return (
       <div className="boravoar_navbar">
-        <div className={classnames("loader-bg", { bv_displaynone: !loading })}>
+        {/* <div className={classnames("loader-bg", { bv_displaynone: !loading })}> */}
+        <div className="loader-bg bv_displaynone">
           <div className="loader-bar" />
         </div>
         <div className="wrapper">

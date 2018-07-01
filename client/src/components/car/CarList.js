@@ -6,6 +6,7 @@ import { getCars } from "../../actions/carActions";
 import NavBar from "../layout/Navbar";
 import CounterWidget from "../common/CounterWidget";
 import CarItem from "./CarItem";
+import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 
 export class CarList extends Component {
   static propTypes = {
@@ -31,7 +32,13 @@ export class CarList extends Component {
 
     let carList;
     if (cars === null || loading) {
-      carList = <div />;
+      carList = (
+        <div>
+          <CarItemSkeleton key="s1" editable={false} />
+          <CarItemSkeleton key="s2" editable={false} />
+          <CarItemSkeleton key="s3" editable={false} />
+        </div>
+      );
     } else {
       carList = cars.map(car => (
         <CarItem key={car._id} car={car} editable={false} />

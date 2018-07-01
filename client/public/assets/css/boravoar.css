@@ -48,6 +48,18 @@ body {
   display: none;
 }
 
+.bv_grayscale {
+  -moz-filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  filter: gray; /* IE6-9 */
+  filter: grayscale(100%);
+  opacity: 0.3;
+}
+
+.bv_fontmagenta {
+  color: magenta !important;
+}
+
 /* TextFieldGoogleGroup */
 .invalid-feedback {
   color: red;
