@@ -25,7 +25,6 @@ export class CarDetails extends Component {
     if (car === null || loading || Object.keys(car).length === 0) {
       carDetails = <div />;
     } else {
-      console.log(car._id);
       carDetails = <CarItem car={car} editable={true} />;
     }
 
