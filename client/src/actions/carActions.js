@@ -17,7 +17,7 @@ export const carCreate = (carData, history) => dispatch => {
 
 //Add ride to car by name
 export const addRideToCarByName = (carid, username) => dispatch => {
-  dispatch(setLoading(true));
+  //dispatch(setLoading(true));
   axios
     .post(`/api/cars/${carid}/ride`, username)
     .then(res => {
@@ -25,14 +25,14 @@ export const addRideToCarByName = (carid, username) => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
-      dispatch(setLoading(false));
+      //dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-      dispatch(setLoading(false));
+      //dispatch(setLoading(false));
     });
 };
 

@@ -35,11 +35,11 @@ export class CarItem extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.car) {
-  //     this.setState({ car: nextProps.car });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.car) {
+      this.setState({ car: nextProps.car });
+    }
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -48,7 +48,9 @@ export class CarItem extends Component {
       name: this.state.username
     };
 
+    this.props.car.rides.push(userData);
     this.props.addRideToCarByName(this.props.car._id, userData);
+    this.setState({ username: "" });
   }
 
   onDeleteCar() {
@@ -112,7 +114,7 @@ export class CarItem extends Component {
     } else {
       rideList = car.rides.map(ride => (
         <CarItemUser
-          key={ride._id}
+          key={ride.name}
           icon="fas fa-user"
           name={ride.name}
           showDelete={carOwner}

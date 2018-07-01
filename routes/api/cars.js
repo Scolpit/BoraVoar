@@ -68,6 +68,7 @@ router.post(
     if (!isValid) return res.status(400).json(errors);
 
     Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .populate("user", ["name", "avatar"])
       .then(car => {
         //Check if pilot is already added to car
         ridenotexist =
