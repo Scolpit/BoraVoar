@@ -5,6 +5,7 @@ import { getCarById } from "../../actions/carActions";
 
 import CarItem from "./CarItem";
 import NavBar from "../layout/Navbar";
+import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 
 export class CarDetails extends Component {
   static propTypes = {
@@ -23,7 +24,7 @@ export class CarDetails extends Component {
 
     let carDetails;
     if (car === null || loading || Object.keys(car).length === 0) {
-      carDetails = <div />;
+      carDetails = <CarItemSkeleton editable={true} />;
     } else {
       carDetails = <CarItem car={car} editable={true} />;
     }

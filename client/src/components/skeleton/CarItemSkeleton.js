@@ -1,12 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 
-const CarItemSkeleton = editable => {
+const CarItemSkeleton = ({ editable }) => {
   return (
     <div
       className={classnames("col-lg-12 bv_grayscale bv_caritemskeleton", {
-        "col-xl-4": editable,
-        "col-xl-6": !editable
+        "col-xl-4": !editable,
+        "col-xl-6": editable
       })}
     >
       <div className="card">
