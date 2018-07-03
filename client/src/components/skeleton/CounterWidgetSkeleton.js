@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 const CounterWidgetSkeleton = ({ label, color, icon }) => {
   return (
-    <div className="col-lg-6 col-sm-6">
+    <div className="col-lg-6 col-sm-6 bv_grayscale">
       <div className="col-sm-12 card dashboard-product">
         <span>{label}</span>
-        <h2 className="dashboard-total-products counter">&#9646</h2>
+        <h2 className="dashboard-total-products counter">0</h2>
         <div className={`side-box ${color}`}>
           <i className={icon} />
         </div>

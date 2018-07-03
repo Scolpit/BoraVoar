@@ -65,6 +65,10 @@ body {
   display: inline-block;
 }
 
+.bv_verticalmiddle {
+  vertical-align: middle !important;
+}
+
 /* TextFieldGoogleGroup */
 .invalid-feedback {
   color: red;

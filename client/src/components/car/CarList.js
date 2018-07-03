@@ -5,6 +5,7 @@ import { getCars } from "../../actions/carActions";
 
 import NavBar from "../layout/Navbar";
 import CounterWidget from "../common/CounterWidget";
+import CounterWidgetSkeleton from "../skeleton/CounterWidgetSkeleton";
 import CarItem from "./CarItem";
 import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 
@@ -26,10 +27,34 @@ export class CarList extends Component {
   }
 
   render() {
-    const { cars, loading } = this.props.car;
+    const { cars, carLoading } = this.props.car;
 
+    //Car counter widget
+    let carCounter;
+    if (cars === null || carLoading) {
+      carCounter = (
+        <CounterWidgetSkeleton
+          label="Viaturas disponiveis"
+          color="bg-warning"
+          icon="fas fa-car"
+        />
+      );
+    } else {
+      const x = cars.length.toString();
+      carCounter = (
+        <CounterWidget
+          to="CarList"
+          label="Viaturas disponiveis"
+          counter={x}
+          color="bg-warning"
+          icon="fas fa-car"
+        />
+      );
+    }
+
+    //Car List
     let carList;
-    if (cars === null || loading) {
+    if (cars === null || carLoading) {
       carList = (
         <div>
           <CarItemSkeleton key="s1" editable={false} />
@@ -55,13 +80,7 @@ export class CarList extends Component {
             </div>
 
             <div className="row m-b-30 dashboard-header">
-              <CounterWidget
-                to="CarList"
-                label="Viaturas disponiveis"
-                counter="9"
-                color="bg-warning"
-                icon="fas fa-car"
-              />
+              {carCounter}
               <CounterWidget
                 to="RideList"
                 label="Pedidos de boleia"
