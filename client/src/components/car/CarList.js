@@ -12,8 +12,7 @@ export class CarList extends Component {
   static propTypes = {
     getCars: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    car: PropTypes.object.isRequired,
-    common: PropTypes.object.isRequired
+    car: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -27,8 +26,7 @@ export class CarList extends Component {
   }
 
   render() {
-    const { cars } = this.props.car;
-    const { loading } = this.props.common;
+    const { cars, loading } = this.props.car;
 
     let carList;
     if (cars === null || loading) {
@@ -82,8 +80,7 @@ export class CarList extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  car: state.car,
-  common: state.common
+  car: state.car
 });
 
 export default connect(

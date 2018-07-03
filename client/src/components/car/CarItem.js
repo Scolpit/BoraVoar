@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import Moment from "react-moment";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import CarItemUser from "./CarItemUser";
 
-import { addRideToCarByName } from "../../actions/carActions";
+import {
+  addRideToCarByName,
+  deleteCar,
+  setFullCar
+} from "../../actions/carActions";
 
 export class CarItem extends Component {
   static propTypes = {
@@ -15,7 +19,9 @@ export class CarItem extends Component {
     auth: PropTypes.object.isRequired,
     car: PropTypes.object.isRequired,
     editable: PropTypes.bool.isRequired,
-    addRideToCarByName: PropTypes.func.isRequired
+    addRideToCarByName: PropTypes.func.isRequired,
+    deleteCar: PropTypes.func.isRequired,
+    setFullCar: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -41,6 +47,7 @@ export class CarItem extends Component {
     }
   }
 
+  //Add rider by name
   onSubmit(e) {
     e.preventDefault();
 
@@ -48,17 +55,26 @@ export class CarItem extends Component {
       name: this.state.username
     };
 
-    this.props.car.rides.push(userData);
-    this.props.addRideToCarByName(this.props.car._id, userData);
-    this.setState({ username: "" });
+    if (
+      this.props.car.rides
+        .map(item => item.name)
+        .indexOf(this.state.username) === -1
+    ) {
+      this.props.car.rides.push(userData);
+      this.props.addRideToCarByName(this.props.car._id, userData);
+      this.setState({ username: "" });
+    }
   }
 
   onDeleteCar() {
-    console.log("Delete Car");
+    this.props.deleteCar(this.props.car._id, this.props.history);
   }
 
-  onMarkAsFull() {
-    console.log("Mark as full");
+  onMarkAsFull(full) {
+    const fullData = {
+      full: full
+    };
+    this.props.setFullCar(this.props.car._id, fullData);
   }
 
   render() {
@@ -83,7 +99,7 @@ export class CarItem extends Component {
         <div>
           <button
             type="button"
-            onClick={this.onMarkAsFull}
+            onClick={() => this.onMarkAsFull(!car.full)}
             className="btn btn-success waves-effect waves-light text-uppercase"
           >
             Marcar como {car.full ? "vazio" : "cheio"}
@@ -206,5 +222,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addRideToCarByName }
-)(CarItem);
+  { addRideToCarByName, deleteCar, setFullCar }
+)(withRouter(CarItem));

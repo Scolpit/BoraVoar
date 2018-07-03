@@ -58,6 +58,11 @@ body {
 
 .bv_fontmagenta {
   color: magenta !important;
+  background-color: magenta;
+}
+
+.bv_inlineblock {
+  display: inline-block;
 }
 
 /* TextFieldGoogleGroup */

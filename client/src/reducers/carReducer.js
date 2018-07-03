@@ -1,4 +1,9 @@
-import { GET_CARS, GET_CAR } from "../actions/types";
+import {
+  GET_CARS,
+  GET_CAR,
+  SET_CAR_LOADING,
+  DELETE_CAR
+} from "../actions/types";
 
 const initialState = {
   car: {},
@@ -8,6 +13,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case SET_CAR_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     case GET_CARS:
       return {
         ...state,
@@ -19,6 +29,11 @@ export default function(state = initialState, action) {
         ...state,
         car: action.payload,
         loading: false
+      };
+    case DELETE_CAR:
+      return {
+        ...state,
+        car: {}
       };
     default:
       return state;

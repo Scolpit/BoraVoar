@@ -10,8 +10,7 @@ export class Navbar extends Component {
   static propTypes = {
     logoutUser: PropTypes.func.isRequired,
     activeMenu: PropTypes.string.isRequired,
-    auth: PropTypes.object.isRequired,
-    common: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
   };
 
   toggleMenu() {
@@ -50,7 +49,7 @@ export class Navbar extends Component {
     const userName = isAuthenticated ? user.name : "Convidado";
     const avatar = isAuthenticated
       ? user.avatar
-      : "assets/images/widget/user-1.png";
+      : "/assets/images/widget/user-1.png";
 
     const subMenuItems = isAuthenticated ? (
       <div>
@@ -82,10 +81,6 @@ export class Navbar extends Component {
 
     return (
       <div className="boravoar_navbar">
-        {/* <div className={classnames("loader-bg", { bv_displaynone: !loading })}> */}
-        <div className="loader-bg bv_displaynone">
-          <div className="loader-bar" />
-        </div>
         <div className="wrapper">
           <div className="main-header-top hidden-print">
             <Link to="/" className="logo">
@@ -192,8 +187,7 @@ export class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  common: state.common
+  auth: state.auth
 });
 
 export default connect(

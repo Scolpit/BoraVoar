@@ -136,32 +136,17 @@ router.post(
   }
 );
 
-// @route   POST api/cars/:carid/markfull
+// @route   POST api/cars/:carid/full
 // @desc    Mark car as full
 // @access  Private
 router.post(
-  "/:carid/markfull",
+  "/:carid/full",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .populate("user", ["name", "avatar"])
       .then(car => {
-        car.full = true;
-        car.save().then(car => res.json(car));
-      })
-      .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
-  }
-);
-
-// @route   POST api/cars/:carid/unmarkfull
-// @desc    Mark car as not full
-// @access  Private
-router.post(
-  "/:carid/unmarkfull",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Car.findOne({ _id: req.params.carid, user: req.user.id })
-      .then(car => {
-        car.full = false;
+        car.full = req.body.full;
         car.save().then(car => res.json(car));
       })
       .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
@@ -198,6 +183,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
+      .populate("user", ["name", "avatar"])
       .then(car => {
         const removeIndex = car.rides
           .map(item => item.id)

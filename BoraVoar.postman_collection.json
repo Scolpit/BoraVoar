@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e66835bf-ce32-4c5d-bed6-a6b6d01b36b3",
+		"_postman_id": "fe29294a-0f25-45de-970e-b4811958655e",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,49 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "7feb43b3-6afc-4ec6-912c-2f383d472145",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"id": "53829b2e-08a3-4da7-adf7-243b7cc1f6e9",
+					"id": "697b0ba6-3f5b-45b6-8cd4-300e4152a436",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -164,6 +122,48 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
+				},
+				{
+					"id": "6a50c5d6-b7d0-4e73-9378-267ea43af633",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
 				}
 			]
 		},
@@ -233,19 +233,16 @@
 						{
 							"key": "oldpassword",
 							"value": "123",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "newpassword",
 							"value": "1234567",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "newpassword2",
 							"value": "1234567",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -702,44 +699,25 @@
 					{
 						"key": "Authorization",
 						"value": "{{token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/markfull",
-					"protocol": "http",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"cars",
-						"5b300253d6cc6323f88e5be1",
-						"markfull"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Mark car as not Full (P)",
-			"request": {
-				"method": "POST",
-				"header": [
+					},
 					{
-						"key": "Authorization",
-						"value": "{{token}}"
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": ""
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "full",
+							"value": "false",
+							"description": "",
+							"type": "text"
+						}
+					]
 				},
 				"url": {
-					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/unmarkfull",
+					"raw": "http://{{url}}/api/cars/5b3b3dee504e9c2260b96fed/full",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -747,8 +725,8 @@
 					"path": [
 						"api",
 						"cars",
-						"5b300253d6cc6323f88e5be1",
-						"unmarkfull"
+						"5b3b3dee504e9c2260b96fed",
+						"full"
 					]
 				}
 			},

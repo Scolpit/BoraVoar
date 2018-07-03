@@ -1,6 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_CARS, GET_CAR } from "./types";
-import { setLoading } from "./commonActions";
+import { GET_ERRORS, GET_CARS, GET_CAR, SET_CAR_LOADING } from "./types";
 
 //Create Car
 export const carCreate = (carData, history) => dispatch => {
@@ -17,7 +16,6 @@ export const carCreate = (carData, history) => dispatch => {
 
 //Add ride to car by name
 export const addRideToCarByName = (carid, username) => dispatch => {
-  //dispatch(setLoading(true));
   axios
     .post(`/api/cars/${carid}/ride`, username)
     .then(res => {
@@ -25,20 +23,36 @@ export const addRideToCarByName = (carid, username) => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
-      //dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-      //dispatch(setLoading(false));
+    });
+};
+
+//Set Car as Full/Not Full
+export const setFullCar = (carid, fullData) => dispatch => {
+  axios
+    .post(`/api/cars/${carid}/full`, fullData)
+    .then(res => {
+      dispatch({
+        type: GET_CAR,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
     });
 };
 
 //Get Car List
 export const getCars = () => dispatch => {
-  dispatch(setLoading(true));
+  dispatch(setCarLoading());
   axios
     .get("/api/cars")
     .then(res => {
@@ -46,20 +60,18 @@ export const getCars = () => dispatch => {
         type: GET_CARS,
         payload: res.data
       });
-      dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-      dispatch(setLoading(false));
     });
 };
 
 //Get Car By Id
 export const getCarById = carid => dispatch => {
-  dispatch(setLoading(true));
+  dispatch(setCarLoading(true));
   axios
     .get(`/api/cars/${carid}`)
     .then(res => {
@@ -67,20 +79,17 @@ export const getCarById = carid => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
-      dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-      dispatch(setLoading(false));
     });
 };
 
 //Delete Ride from Car
 export const deleteRideFromCar = (carid, rideid) => dispatch => {
-  dispatch(setLoading(true));
   axios
     .delete(`/api/cars/${carid}/ride/${rideid}`)
     .then(res => {
@@ -88,13 +97,34 @@ export const deleteRideFromCar = (carid, rideid) => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
-      dispatch(setLoading(false));
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
-      dispatch(setLoading(false));
     });
+};
+
+export const deleteCar = (carid, history) => dispatch => {
+  if (window.confirm("Tem a certeza que deseja eliminar esta viatura?")) {
+    axios
+      .delete(`/api/cars/${carid}`)
+      .then(res => {
+        history.push("/CarList");
+      })
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
+};
+
+// Set Loading
+export const setCarLoading = () => {
+  return {
+    type: SET_CAR_LOADING
+  };
 };

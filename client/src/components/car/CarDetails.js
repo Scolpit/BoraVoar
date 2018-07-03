@@ -10,7 +10,6 @@ import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 export class CarDetails extends Component {
   static propTypes = {
     car: PropTypes.object.isRequired,
-    common: PropTypes.object.isRequired,
     getCarById: PropTypes.func.isRequired
   };
 
@@ -19,14 +18,14 @@ export class CarDetails extends Component {
   }
 
   render() {
-    const { car } = this.props.car;
-    const { loading } = this.props.common;
+    const { car, loading } = this.props.car;
 
     let carDetails;
     if (car === null || loading || Object.keys(car).length === 0) {
       carDetails = <CarItemSkeleton editable={true} />;
     } else {
-      carDetails = <CarItem car={car} editable={true} />;
+      // carDetails = <CarItem car={car} editable={true} />;
+      carDetails = <CarItemSkeleton editable={true} />;
     }
 
     return (
@@ -48,8 +47,7 @@ export class CarDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  car: state.car,
-  common: state.common
+  car: state.car
 });
 
 export default connect(
