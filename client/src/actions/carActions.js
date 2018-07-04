@@ -33,7 +33,7 @@ export const addRideToCarByName = (carid, username) => dispatch => {
 };
 
 //Set Car as Full/Not Full
-export const setFullCar = (carid, fullData) => dispatch => {
+export const setFullCar = (carid, fullData, setLoadingOff) => dispatch => {
   axios
     .post(`/api/cars/${carid}/full`, fullData)
     .then(res => {
@@ -41,6 +41,7 @@ export const setFullCar = (carid, fullData) => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
+      setLoadingOff();
     })
     .catch(err => {
       dispatch({

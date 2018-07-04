@@ -6,11 +6,41 @@ import Moment from "react-moment";
 export class RideItem extends Component {
   static propTypes = {
     ride: PropTypes.object.isRequired,
-    showButton: PropTypes.bool.isRequired
+    auth: PropTypes.object.isRequired,
+    isDetailsPage: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired
   };
 
   render() {
-    const { ride, showButton } = this.props;
+    const { ride, isDetailsPage, isAdmin, auth } = this.props;
+
+    let buttons = <div />;
+    if (isDetailsPage && isAdmin) {
+      buttons = (
+        <button
+          type="button"
+          className="btn btn-primary waves-effect waves-light"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Adicionar à viatura"
+        >
+          Convidar
+        </button>
+      );
+    }
+    if (!isDetailsPage && ride.user._id === auth.user.id) {
+      buttons = (
+        <button
+          type="button"
+          className="btn btn-danger waves-effect waves-light"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Adicionar à viatura"
+        >
+          Delete
+        </button>
+      );
+    }
 
     return (
       <tr>
@@ -26,24 +56,15 @@ export class RideItem extends Component {
           <i className="fas fa-arrow-right m-l-5 m-r-5" />
           {ride.to}
         </td>
-        {showButton && (
-          <td className="faq-table-btn bv_verticalmiddle">
-            <button
-              type="button"
-              className="btn btn-primary waves-effect waves-light"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Adicionar à viatura"
-            >
-              Convidar
-            </button>
-          </td>
-        )}
+
+        <td className="faq-table-btn bv_verticalmiddle">{buttons}</td>
       </tr>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 export default connect(mapStateToProps)(RideItem);

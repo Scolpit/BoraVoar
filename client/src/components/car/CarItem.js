@@ -28,12 +28,14 @@ export class CarItem extends Component {
     super(props);
 
     this.state = {
-      username: ""
+      username: "",
+      isLoading: false
     };
 
     this.onDeleteCar = this.onDeleteCar.bind(this);
     this.onMarkAsFull = this.onMarkAsFull.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.setLoadingOff = this.setLoadingOff.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -71,10 +73,15 @@ export class CarItem extends Component {
   }
 
   onMarkAsFull(full) {
+    this.setState({ isLoading: true });
     const fullData = {
       full: full
     };
-    this.props.setFullCar(this.props.car._id, fullData);
+    this.props.setFullCar(this.props.car._id, fullData, this.setLoadingOff);
+  }
+
+  setLoadingOff() {
+    this.setState({ isLoading: false });
   }
 
   render() {
@@ -94,16 +101,35 @@ export class CarItem extends Component {
         </Link>
       );
     }
+
+    let markFullButton;
+    if (this.state.isLoading) {
+      markFullButton = (
+        <button
+          type="button"
+          disabled
+          className="btn btn-success waves-effect waves-light text-uppercase"
+        >
+          <i className="fas fa-spinner fa-spin" /> Marcar como{" "}
+          {car.full ? "vazio" : "cheio"}
+        </button>
+      );
+    } else {
+      markFullButton = (
+        <button
+          type="button"
+          onClick={() => this.onMarkAsFull(!car.full)}
+          className="btn btn-success waves-effect waves-light text-uppercase"
+        >
+          Marcar como {car.full ? "vazio" : "cheio"}
+        </button>
+      );
+    }
+
     if (carOwner) {
       carButtons = (
         <div>
-          <button
-            type="button"
-            onClick={() => this.onMarkAsFull(!car.full)}
-            className="btn btn-success waves-effect waves-light text-uppercase"
-          >
-            Marcar como {car.full ? "vazio" : "cheio"}
-          </button>
+          {markFullButton}
           <button
             type="button"
             onClick={this.onDeleteCar}

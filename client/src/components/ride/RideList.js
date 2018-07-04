@@ -51,78 +51,9 @@ export class RideList extends Component {
             <RideTable
               rides={rides}
               tableTitle="Pedidos de boleia"
-              showButton={true}
+              isDetailsPage={false}
+              isAdmin={false}
             />
-
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="tab-pane" id="project" role="tabpanel">
-                  <div className="card">
-                    <div className="card-header">
-                      <h5 className="card-header-text">Pedidos de boleia</h5>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-12">
-                        <div className="project-table">
-                          <div className="table-responsive">
-                            <table className="table">
-                              <thead>
-                                <tr>
-                                  <th className="text-center txt-primary pro-pic" />
-                                  <th className="text-center txt-primary">
-                                    Nome
-                                  </th>
-                                  <th className="text-center txt-primary">
-                                    Data
-                                  </th>
-                                  <th className="text-center txt-primary">
-                                    Destino
-                                  </th>
-                                  <th className="text-center txt-primary" />
-                                </tr>
-                              </thead>
-                              <tbody className="text-center">
-                                <tr>
-                                  <td>
-                                    <img
-                                      src="/assets/images/widget/user-1.png"
-                                      className="img-circle"
-                                      alt="tbl"
-                                    />
-                                  </td>
-                                  <td className="bv_verticalmiddle">
-                                    Nuno Morgado
-                                  </td>
-                                  <td className="bv_verticalmiddle">
-                                    2018-03-27
-                                  </td>
-                                  <td className="bv_verticalmiddle">
-                                    Lisboa
-                                    <i className="fas fa-arrow-right m-l-5 m-r-5" />
-                                    Castelo de Vide
-                                  </td>
-                                  <td className="faq-table-btn bv_verticalmiddle">
-                                    <button
-                                      type="button"
-                                      className="btn btn-primary waves-effect waves-light"
-                                      data-toggle="tooltip"
-                                      data-placement="top"
-                                      title="Adicionar à viatura"
-                                    >
-                                      Convidar
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

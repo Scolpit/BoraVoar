@@ -34,22 +34,40 @@ export class CarItemUser extends Component {
   render() {
     const { icon, name, showDelete, carid, rideid } = this.props;
 
+    let deleteButton;
+    if (showDelete) {
+      if (!isEmpty(rideid)) {
+        deleteButton = (
+          <button
+            type="button"
+            onClick={this.deleteRider.bind(this, carid, rideid)}
+            className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
+          >
+            Eliminar
+          </button>
+        );
+      } else {
+        deleteButton = (
+          <button
+            type="button"
+            disabled
+            className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
+          >
+            <i class="fas fa-spinner fa-spin" /> Eliminar
+          </button>
+        );
+      }
+    } else {
+      deleteButton = <div />;
+    }
+
     return (
       <div>
         {this.state.showUser && (
           <div className="user-block-2-activities">
             <div className="user-block-2-active">
               <i className={icon} /> {name}
-              {showDelete &&
-                !isEmpty(rideid) && (
-                  <button
-                    type="button"
-                    onClick={this.deleteRider.bind(this, carid, rideid)}
-                    className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
-                  >
-                    Eliminar
-                  </button>
-                )}
+              {deleteButton}
             </div>
           </div>
         )}

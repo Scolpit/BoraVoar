@@ -5,16 +5,22 @@ import RideItem from "./RideItem";
 
 export class RideTable extends Component {
   static propTypes = {
-    rides: PropTypes.object.isRequired,
-    showButton: PropTypes.bool.isRequired,
+    rides: PropTypes.array.isRequired,
+    isDetailsPage: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     tableTitle: PropTypes.string.isRequired
   };
 
   render() {
-    const { rides, tableTitle, showButton } = this.props;
+    const { rides, tableTitle, isDetailsPage, isAdmin } = this.props;
 
     const rideItems = rides.map(ride => (
-      <RideItem key={ride._id} showButton={showButton} ride={ride} />
+      <RideItem
+        key={ride._id}
+        isDetailsPage={isDetailsPage}
+        isAdmin={isAdmin}
+        ride={ride}
+      />
     ));
 
     return (
@@ -36,9 +42,7 @@ export class RideTable extends Component {
                             <th className="text-center txt-primary">Nome</th>
                             <th className="text-center txt-primary">Data</th>
                             <th className="text-center txt-primary">Destino</th>
-                            {showButton && (
-                              <th className="text-center txt-primary" />
-                            )}
+                            <th className="text-center txt-primary" />
                           </tr>
                         </thead>
                         <tbody className="text-center">{rideItems}</tbody>
