@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fe29294a-0f25-45de-970e-b4811958655e",
+		"_postman_id": "f9a88ab9-da27-4ad6-91c5-7b5c25d4dffa",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,49 @@
 			},
 			"response": [
 				{
-					"id": "140008b7-fb4e-47b3-8adb-cef72d0267d6",
+					"id": "3fb31dcc-9dc6-4142-889d-95349fc18b8b",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"id": "68c6e4ab-bb06-4f00-a6fb-92e0ce4b96e1",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -122,48 +164,6 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
-				},
-				{
-					"id": "01aaf88e-f17c-483d-8b3c-59479194f6c1",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
 				}
 			]
 		},
@@ -411,6 +411,42 @@
 						"api",
 						"rides",
 						"5b2ff78f62928a3b94b4695e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ride By Date NOT WORKING",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "scolpit@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/rides/date/2018-07-30",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rides",
+						"date",
+						"2018-07-30"
 					]
 				}
 			},
@@ -711,7 +747,6 @@
 						{
 							"key": "full",
 							"value": "false",
-							"description": "",
 							"type": "text"
 						}
 					]

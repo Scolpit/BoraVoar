@@ -28,7 +28,17 @@ router.get("/:id", (req, res) => {
   Ride.findById(req.params.id)
     .populate("user", ["name", "avatar"])
     .then(ride => res.json(ride))
-    .catch(err => res.status(404).json({ nopostfound: "Ride not found" }));
+    .catch(err => res.status(404).json({ noridefound: "Ride not found" }));
+});
+
+// @route   GET api/rides/date/:id
+// @desc    Get rides by date
+// @access  Public
+router.get("/date/:date", (req, res) => {
+  Ride.find("date", req.params.date)
+    .populate("user", ["name", "avatar"])
+    .then(rides => res.json(rides))
+    .catch(err => res.status(404).json({ noridesfound: "Ride not found" }));
 });
 
 // @route   POST api/rides
