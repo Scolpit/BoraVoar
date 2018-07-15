@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f9a88ab9-da27-4ad6-91c5-7b5c25d4dffa",
+		"_postman_id": "acc1f5bb-5db7-4b2f-b176-1f6da6d56678",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "3fb31dcc-9dc6-4142-889d-95349fc18b8b",
+					"id": "69eadbf0-8dc6-443e-b66b-57cca1c4f297",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -87,7 +87,7 @@
 					"body": ""
 				},
 				{
-					"id": "68c6e4ab-bb06-4f00-a6fb-92e0ce4b96e1",
+					"id": "a0fc2273-5ec5-4b9b-85e3-31ac8f761698",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -417,7 +417,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Ride By Date NOT WORKING",
+			"name": "Get Ride By Date",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -437,7 +437,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{url}}/api/rides/date/2018-07-30",
+					"raw": "http://{{url}}/api/rides/date/20190421",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -446,7 +446,7 @@
 						"api",
 						"rides",
 						"date",
-						"2018-07-30"
+						"20190421"
 					]
 				}
 			},

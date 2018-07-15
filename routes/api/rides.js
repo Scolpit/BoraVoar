@@ -31,14 +31,26 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(404).json({ noridefound: "Ride not found" }));
 });
 
-// @route   GET api/rides/date/:id
+// @route   GET api/rides/date/:date
 // @desc    Get rides by date
 // @access  Public
 router.get("/date/:date", (req, res) => {
-  Ride.find("date", req.params.date)
+  const year = req.params.date.substring(0, 4);
+  const month = req.params.date.substring(4, 6);
+  const day = req.params.date.substring(6, 8);
+  const dt = new Date(year, month - 1, day);
+  const dte = new Date(year, month - 1, day);
+  dte.setDate(dte.getDate() + 1);
+
+  Ride.find({
+    date: {
+      $gte: dt,
+      $lt: dte
+    }
+  })
     .populate("user", ["name", "avatar"])
     .then(rides => res.json(rides))
-    .catch(err => res.status(404).json({ noridesfound: "Ride not found" }));
+    .catch(err => res.status(404).json({ noridesfound: "Rides not found" }));
 });
 
 // @route   POST api/rides

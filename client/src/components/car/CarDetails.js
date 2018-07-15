@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCarById } from "../../actions/carActions";
+import { getRidesByDate } from "../../actions/rideActions";
 
 import CarItem from "./CarItem";
 import NavBar from "../layout/Navbar";
@@ -10,11 +11,19 @@ import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 export class CarDetails extends Component {
   static propTypes = {
     car: PropTypes.object.isRequired,
-    getCarById: PropTypes.func.isRequired
+    getCarById: PropTypes.func.isRequired,
+    getRidesByDate: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getCarById(this.props.match.params.id);
+    this.props.getCarById(
+      this.props.match.params.id,
+      this.afterCarLoad.bind(this)
+    );
+  }
+
+  afterCarLoad(date) {
+    //this.props.getRidesByDate(date);
   }
 
   render() {
@@ -51,5 +60,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCarById }
+  { getCarById, getRidesByDate }
 )(CarDetails);

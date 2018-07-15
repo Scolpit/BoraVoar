@@ -71,7 +71,7 @@ export const getCars = () => dispatch => {
 };
 
 //Get Car By Id
-export const getCarById = carid => dispatch => {
+export const getCarById = (carid, afterCarLoad) => dispatch => {
   dispatch(setCarLoading(true));
   axios
     .get(`/api/cars/${carid}`)
@@ -80,6 +80,8 @@ export const getCarById = carid => dispatch => {
         type: GET_CAR,
         payload: res.data
       });
+      //console.log(res.data.date);
+      afterCarLoad(res.data.date);
     })
     .catch(err => {
       dispatch({
