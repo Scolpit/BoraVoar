@@ -3,13 +3,23 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 
+import { addRideToCarByUserId } from "../../actions/carActions";
+
 export class RideItem extends Component {
   static propTypes = {
     ride: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    car: PropTypes.object.isRequired,
     isDetailsPage: PropTypes.bool.isRequired,
-    isAdmin: PropTypes.bool.isRequired
+    isAdmin: PropTypes.bool.isRequired,
+    addRideToCarByUserId: PropTypes.func.isRequired
   };
+
+  inviteToCar() {
+    const { car, ride } = this.props;
+
+    this.props.addRideToCarByUserId(car.car._id, ride.user._id);
+  }
 
   render() {
     const { ride, isDetailsPage, isAdmin, auth } = this.props;
@@ -22,7 +32,8 @@ export class RideItem extends Component {
           className="btn btn-primary waves-effect waves-light"
           data-toggle="tooltip"
           data-placement="top"
-          title="Adicionar à viatura"
+          title="Convidar"
+          onClick={this.inviteToCar.bind(this)}
         >
           Convidar
         </button>
@@ -64,7 +75,11 @@ export class RideItem extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  car: state.car
 });
 
-export default connect(mapStateToProps)(RideItem);
+export default connect(
+  mapStateToProps,
+  { addRideToCarByUserId }
+)(RideItem);

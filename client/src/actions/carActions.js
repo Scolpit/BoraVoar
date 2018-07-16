@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setRideLoading } from "./rideActions";
 import { GET_ERRORS, GET_CARS, GET_CAR, SET_CAR_LOADING } from "./types";
 
 //Create Car
@@ -18,6 +19,24 @@ export const carCreate = (carData, history) => dispatch => {
 export const addRideToCarByName = (carid, username) => dispatch => {
   axios
     .post(`/api/cars/${carid}/ride`, username)
+    .then(res => {
+      dispatch({
+        type: GET_CAR,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+//Add ride to car by id
+export const addRideToCarByUserId = (carid, userid) => dispatch => {
+  axios
+    .post(`/api/cars/${carid}/ride/${userid}`)
     .then(res => {
       dispatch({
         type: GET_CAR,
@@ -72,16 +91,16 @@ export const getCars = () => dispatch => {
 
 //Get Car By Id
 export const getCarById = (carid, afterCarLoad) => dispatch => {
-  dispatch(setCarLoading(true));
+  dispatch(setCarLoading());
+  dispatch(setRideLoading());
   axios
     .get(`/api/cars/${carid}`)
     .then(res => {
+      afterCarLoad(res.data.date);
       dispatch({
         type: GET_CAR,
         payload: res.data
       });
-      //console.log(res.data.date);
-      afterCarLoad(res.data.date);
     })
     .catch(err => {
       dispatch({
@@ -109,6 +128,7 @@ export const deleteRideFromCar = (carid, rideid) => dispatch => {
     });
 };
 
+//Delete car
 export const deleteCar = (carid, history) => dispatch => {
   if (window.confirm("Tem a certeza que deseja eliminar esta viatura?")) {
     axios

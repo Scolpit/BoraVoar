@@ -7,10 +7,13 @@ import { getRidesByDate } from "../../actions/rideActions";
 import CarItem from "./CarItem";
 import NavBar from "../layout/Navbar";
 import CarItemSkeleton from "../skeleton/CarItemSkeleton";
+import RideTable from "../ride/RideTable";
 
 export class CarDetails extends Component {
   static propTypes = {
     car: PropTypes.object.isRequired,
+    ride: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     getCarById: PropTypes.func.isRequired,
     getRidesByDate: PropTypes.func.isRequired
   };
@@ -23,17 +26,33 @@ export class CarDetails extends Component {
   }
 
   afterCarLoad(date) {
-    //this.props.getRidesByDate(date);
+    this.props.getRidesByDate(date);
   }
 
   render() {
-    const { car, loading } = this.props.car;
+    const { car, carloading } = this.props.car;
+    const { rides, rideloading } = this.props.ride;
+    const { user } = this.props.auth;
 
     let carDetails;
-    if (car === null || loading || Object.keys(car).length === 0) {
+    if (car === null || carloading || Object.keys(car).length === 0) {
       carDetails = <CarItemSkeleton editable={true} />;
     } else {
       carDetails = <CarItem car={car} editable={true} />;
+    }
+
+    let rideList;
+    if (rides === null || rideloading || Object.keys(rides).length === 0) {
+      rideList = <div />;
+    } else {
+      rideList = (
+        <RideTable
+          rides={rides}
+          tableTitle={`Pedidos de boleia para dia ${car.date.substring(0, 10)}`}
+          isDetailsPage={true}
+          isAdmin={car.user._id === user.id}
+        />
+      );
     }
 
     return (
@@ -47,6 +66,7 @@ export class CarDetails extends Component {
               </div>
             </div>
             {carDetails}
+            {rideList}
           </div>
         </div>
       </div>
@@ -55,7 +75,9 @@ export class CarDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  car: state.car
+  car: state.car,
+  ride: state.ride,
+  auth: state.auth
 });
 
 export default connect(

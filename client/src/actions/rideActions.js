@@ -25,7 +25,6 @@ export const getRidesByDate = date => dispatch => {
   const parsedate =
     date.substring(0, 4) + date.substring(5, 7) + date.substring(8, 10);
 
-  dispatch(setRideLoading());
   axios
     .get(`/api/rides/date/${parsedate}`)
     .then(res => {
