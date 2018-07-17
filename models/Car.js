@@ -15,6 +15,14 @@ const CarSchema = new Schema({
       name: { type: String, required: true }
     }
   ],
+  ridesByDate: [
+    {
+      user: { type: Schema.Types.ObjectId, ref: "users" },
+      from: { type: String, required: true, max: 30 },
+      to: { type: String, required: true, max: 30 },
+      used: { type: Boolean, default: false }
+    }
+  ],
   chat: [
     {
       user: { type: Schema.Types.ObjectId, ref: "users" },

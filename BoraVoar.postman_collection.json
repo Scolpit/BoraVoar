@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "69eadbf0-8dc6-443e-b66b-57cca1c4f297",
+					"id": "99d59b49-51fc-4a7d-980f-997a9bec4f87",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -87,7 +87,7 @@
 					"body": ""
 				},
 				{
-					"id": "a0fc2273-5ec5-4b9b-85e3-31ac8f761698",
+					"id": "0c06d941-ccd8-4825-ae02-5457457d7d06",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -417,42 +417,6 @@
 			"response": []
 		},
 		{
-			"name": "Get Ride By Date",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "scolpit@gmail.com",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "1234",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{url}}/api/rides/date/20190421",
-					"protocol": "http",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"rides",
-						"date",
-						"20190421"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Delete Ride By Id (P)",
 			"request": {
 				"method": "DELETE",
@@ -586,7 +550,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{url}}/api/cars/5b31f1eed77d1833f0e72464",
+					"raw": "http://{{url}}/api/cars/5b31f0d16644ce2dd0bbf655",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -594,7 +558,7 @@
 					"path": [
 						"api",
 						"cars",
-						"5b31f1eed77d1833f0e72464"
+						"5b31f0d16644ce2dd0bbf655"
 					]
 				}
 			},

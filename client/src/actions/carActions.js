@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setRideLoading } from "./rideActions";
 import { GET_ERRORS, GET_CARS, GET_CAR, SET_CAR_LOADING } from "./types";
 
 //Create Car
@@ -90,13 +89,11 @@ export const getCars = () => dispatch => {
 };
 
 //Get Car By Id
-export const getCarById = (carid, afterCarLoad) => dispatch => {
+export const getCarById = carid => dispatch => {
   dispatch(setCarLoading());
-  dispatch(setRideLoading());
   axios
     .get(`/api/cars/${carid}`)
     .then(res => {
-      afterCarLoad(res.data.date);
       dispatch({
         type: GET_CAR,
         payload: res.data
