@@ -17,7 +17,11 @@ const CarSchema = new Schema({
   ],
   ridesByDate: [
     {
-      user: { type: Schema.Types.ObjectId, ref: "users" },
+      user: {
+        _id: { type: String },
+        name: { type: String },
+        avatar: { type: String }
+      },
       from: { type: String, required: true, max: 30 },
       to: { type: String, required: true, max: 30 },
       used: { type: Boolean, default: false }

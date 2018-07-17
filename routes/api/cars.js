@@ -41,9 +41,7 @@ router.get("/:id", (req, res) => {
       })
         .populate("user", ["name", "avatar"])
         .then(rides => {
-          console.log(rides);
           car.ridesByDate = rides;
-          car.ridesByDate.user = rides.user;
           res.json(car);
         })
         .catch(err => res.json(car));

@@ -20,11 +20,11 @@ export class CarDetails extends Component {
   }
 
   render() {
-    const { car, carloading } = this.props.car;
+    const { car, loading } = this.props.car;
     const { user } = this.props.auth;
 
     let carDetails;
-    if (car === null || carloading || Object.keys(car).length === 0) {
+    if (car === null || loading || Object.keys(car).length === 0) {
       carDetails = <CarItemSkeleton editable={true} />;
     } else {
       carDetails = (
