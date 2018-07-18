@@ -31,10 +31,23 @@ router.get("/:id", (req, res) => {
   Car.findById(req.params.id)
     .populate("user", ["name", "avatar"])
     .then(car => {
-      let x = getRidesByDate(car.date);
-      console.log(x);
-      car.ridesByDate = x;
-      res.json(car);
+      let dte = new Date(car.date.getTime());
+      dte.setDate(dte.getDate() + 1);
+
+      Ride.find({
+        date: {
+          $gte: car.date,
+          $lt: dte
+        }
+      })
+        .populate("user", ["name", "avatar"])
+        .then(rides => {
+          car.ridesByDate = rides;
+          res.json(car);
+        })
+        .catch(err => {
+          res.json(car);
+        });
     })
     .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
 });
@@ -254,24 +267,5 @@ router.delete(
       .catch(err => res.status(401).json({ nocarfound: "Not authorized" }));
   }
 );
-
-async function getRidesByDate(date) {
-  let dte = new Date(date.getTime());
-  dte.setDate(dte.getDate() + 1);
-
-  Ride.find({
-    date: {
-      $gte: date,
-      $lt: dte
-    }
-  })
-    .populate("user", ["name", "avatar"])
-    .then(rides => {
-      return rides;
-    })
-    .catch(err => {
-      return [];
-    });
-}
 
 module.exports = router;
