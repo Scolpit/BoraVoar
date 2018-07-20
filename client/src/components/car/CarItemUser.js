@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteRideFromCar } from "../../actions/carActions";
 import isEmpty from "../../validation/is-empty";
+import { toast } from "react-toastify";
 
 export class CarItemUser extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ export class CarItemUser extends Component {
     ) {
       this.setState({ showUser: false });
       this.props.deleteRideFromCar(carid, rideid);
+      toast.warning("Piloto removido");
     }
   }
 

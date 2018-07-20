@@ -1,11 +1,15 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { GET_ERRORS, GET_CARS, GET_CAR, SET_CAR_LOADING } from "./types";
 
 //Create Car
 export const carCreate = (carData, history) => dispatch => {
   axios
     .post("/api/cars", carData)
-    .then(res => history.push("/CarList"))
+    .then(res => {
+      toast.success("Viatura criada");
+      history.push("/CarList");
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -131,6 +135,7 @@ export const deleteCar = (carid, history) => dispatch => {
     axios
       .delete(`/api/cars/${carid}`)
       .then(res => {
+        toast.warning("Viatura eliminada");
         history.push("/CarList");
       })
       .catch(err =>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import { toast } from "react-toastify";
 
 import { addRideToCarByUserId } from "../../actions/carActions";
 
@@ -19,6 +20,7 @@ export class RideItem extends Component {
     const { car, ride } = this.props;
 
     this.props.addRideToCarByUserId(car.car._id, ride.user._id);
+    toast.success("Piloto adicionado com sucesso");
   }
 
   render() {

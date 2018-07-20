@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -39,6 +41,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="app">
+            <ToastContainer />
             <Route exact path="/" component={Login} />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/CarList" component={CarList} />

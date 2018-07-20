@@ -69,6 +69,36 @@ body {
   vertical-align: middle !important;
 }
 
+/* Full car */
+.fullcar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-top: 125px;
+  padding-bottom: 114px;
+  margin-top: -20px;
+  font-size: 135px;
+  background-color: black;
+  opacity: 0.6;
+  font-weight: bold;
+}
+
+@media (max-width: 544px) {
+  .fullcar {
+    padding-top: 200px;
+    font-size: 50px;
+    padding-bottom: 165px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .fullcar {
+    padding-top: 175px;
+    font-size: 70px;
+    padding-bottom: 163px;
+  }
+}
+
 /* TextFieldGoogleGroup */
 .invalid-feedback {
   color: red;

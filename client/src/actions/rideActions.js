@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GET_ERRORS, GET_RIDES, SET_RIDE_LOADING } from "./types";
+import { toast } from "react-toastify";
 
 //Get Rides List
 export const getRides = () => dispatch => {
@@ -45,7 +46,10 @@ export const getRidesByDate = date => dispatch => {
 export const rideCreate = (rideData, history) => dispatch => {
   axios
     .post("/api/rides", rideData)
-    .then(res => history.push("/RideList"))
+    .then(res => {
+      toast.success("Pedido de boleia criado");
+      history.push("/RideList");
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

@@ -5,6 +5,8 @@ import classnames from "classnames";
 import Moment from "react-moment";
 import { Link, withRouter } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 import CarItemUser from "./CarItemUser";
 
 import {
@@ -65,6 +67,9 @@ export class CarItem extends Component {
       this.props.car.rides.push(userData);
       this.props.addRideToCarByName(this.props.car._id, userData);
       this.setState({ username: "" });
+      toast.success("Piloto adicionado com sucesso");
+    } else {
+      toast.error("Piloto já adicionado");
     }
   }
 
@@ -121,7 +126,7 @@ export class CarItem extends Component {
           onClick={() => this.onMarkAsFull(!car.full)}
           className="btn btn-success waves-effect waves-light text-uppercase"
         >
-          Marcar como {car.full ? "vazio" : "cheio"}
+          Marcar como {car.full ? "disponível" : "cheio"}
         </button>
       );
     }
@@ -175,6 +180,7 @@ export class CarItem extends Component {
       >
         <div className="card">
           <div className="user-block-2">
+            {car.full && <div className="fullcar">CHEIO</div>}
             <img
               className="img-fluid"
               src={car.user.avatar}
