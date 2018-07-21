@@ -63,7 +63,18 @@ router.delete(
   (req, res) => {
     Ride.findOne({ _id: req.params.id, user: req.user.id })
       .then(ride => {
-        ride.remove().then(() => res.json({ success: true }));
+        ride.remove().then(() => {
+          var now = new Date();
+          var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+          Ride.find({ date: { $gte: dt } })
+            .populate("user", ["name", "avatar"])
+            .sort({ date: "asc" })
+            .then(rides => res.json(rides))
+            .catch(err =>
+              res.status(404).json({ noridesfound: "Rides not found" })
+            );
+        });
       })
       .catch(err => res.status(401).json({ noridefound: "Not authorized" }));
   }
