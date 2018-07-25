@@ -52,6 +52,18 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
 });
 
+// @route   GET api/cars/count/count
+// @desc    Get cars count
+// @access  Public
+router.get("/count/count", (req, res) => {
+  var now = new Date();
+  var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  Car.find({ date: { $gte: dt } }).count(function(err, count) {
+    res.json(count);
+  });
+});
+
 // @route   POST api/cars
 // @desc    Create Car
 // @access  Private

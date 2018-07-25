@@ -1,6 +1,13 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { GET_ERRORS, GET_CARS, GET_CAR, SET_CAR_LOADING } from "./types";
+import {
+  GET_ERRORS,
+  GET_CARS,
+  GET_CAR,
+  SET_CAR_LOADING,
+  SET_CAR_COUNT_LOADING,
+  GET_CAR_COUNT
+} from "./types";
 
 //Create Car
 export const carCreate = (carData, history) => dispatch => {
@@ -111,6 +118,25 @@ export const getCarById = carid => dispatch => {
     });
 };
 
+//Get Car Count
+export const getCarCount = () => dispatch => {
+  dispatch(setCarCountLoading());
+  axios
+    .get("/api/cars/count/count")
+    .then(res => {
+      dispatch({
+        type: GET_CAR_COUNT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 //Delete Ride from Car
 export const deleteRideFromCar = (carid, rideid) => dispatch => {
   axios
@@ -151,5 +177,12 @@ export const deleteCar = (carid, history) => dispatch => {
 export const setCarLoading = () => {
   return {
     type: SET_CAR_LOADING
+  };
+};
+
+// Set Count Loading
+export const setCarCountLoading = () => {
+  return {
+    type: SET_CAR_COUNT_LOADING
   };
 };

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import CounterWidget from "../common/CounterWidget";
+import CounterWidgetCars from "../common/CounterWidgetCars";
 import NavBar from "../layout/Navbar";
 import RideTable from "./RideTable";
 
@@ -32,13 +33,7 @@ export class RideList extends Component {
               </div>
             </div>
             <div className="row m-b-30 dashboard-header">
-              <CounterWidget
-                to="CarList"
-                label="Viaturas disponiveis"
-                counter="9"
-                color="bg-warning"
-                icon="fas fa-car"
-              />
+              <CounterWidgetCars />
               <CounterWidget
                 to="RideList"
                 label="Pedidos de boleia"

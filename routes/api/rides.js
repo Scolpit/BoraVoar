@@ -32,6 +32,18 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(404).json({ noridefound: "Ride not found" }));
 });
 
+// @route   GET api/rides/count/count
+// @desc    Get rides count
+// @access  Public
+router.get("/count/count", (req, res) => {
+  var now = new Date();
+  var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  Ride.find({ date: { $gte: dt } }).count(function(err, count) {
+    res.json(count);
+  });
+});
+
 // @route   POST api/rides
 // @desc    Create Ride
 // @access  Private

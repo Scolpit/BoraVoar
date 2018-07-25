@@ -45,7 +45,7 @@
 			},
 			"response": [
 				{
-					"id": "99d59b49-51fc-4a7d-980f-997a9bec4f87",
+					"id": "f24d8627-b793-47d9-be75-5c6691de20f9",
 					"name": "John Dow",
 					"originalRequest": {
 						"method": "POST",
@@ -87,7 +87,7 @@
 					"body": ""
 				},
 				{
-					"id": "0c06d941-ccd8-4825-ae02-5457457d7d06",
+					"id": "273e45d4-a09d-4fba-9f16-fbe05f741b92",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -382,6 +382,42 @@
 			"response": []
 		},
 		{
+			"name": "Get Rides Count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "scolpit@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/rides/count/count",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"rides",
+						"count",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Ride By Id",
 			"request": {
 				"method": "GET",
@@ -490,6 +526,42 @@
 						"api",
 						"cars",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cars Count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "scolpit@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{url}}/api/cars/count/count",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cars",
+						"count",
+						"count"
 					]
 				}
 			},
