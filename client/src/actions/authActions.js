@@ -1,4 +1,5 @@
 import setAuthToken from "../utils/setAuthToken";
+import { toast } from "react-toastify";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -30,6 +31,7 @@ export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/login", userData)
     .then(res => {
+      toast.success("Login efectuado com sucesso");
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
@@ -54,6 +56,7 @@ export const setCurrentUser = decoded => {
 
 // Log out user
 export const logoutUser = () => dispatch => {
+  toast.success("Logout efectuado");
   localStorage.removeItem("jwtToken");
   setAuthToken(false);
   dispatch(setCurrentUser({}));

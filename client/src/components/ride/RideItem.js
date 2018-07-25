@@ -5,6 +5,7 @@ import Moment from "react-moment";
 import { toast } from "react-toastify";
 
 import { addRideToCarByUserId } from "../../actions/carActions";
+import { deleteRide } from "../../actions/rideActions";
 
 export class RideItem extends Component {
   static propTypes = {
@@ -13,14 +14,29 @@ export class RideItem extends Component {
     car: PropTypes.object.isRequired,
     isDetailsPage: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-    addRideToCarByUserId: PropTypes.func.isRequired
+    addRideToCarByUserId: PropTypes.func.isRequired,
+    deleteRide: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showRide: true
+    };
+  }
 
   inviteToCar() {
     const { car, ride } = this.props;
 
     this.props.addRideToCarByUserId(car.car._id, ride.user._id);
     toast.success("Piloto adicionado com sucesso");
+  }
+
+  btnDeleteRide() {
+    const { ride } = this.props;
+    this.setState({ showRide: false });
+    this.props.deleteRide(ride._id);
   }
 
   render() {
@@ -48,30 +64,33 @@ export class RideItem extends Component {
           className="btn btn-danger waves-effect waves-light"
           data-toggle="tooltip"
           data-placement="top"
-          title="Adicionar à viatura"
+          title="Eliminar"
+          onClick={this.btnDeleteRide.bind(this)}
         >
-          Delete
+          Eliminar
         </button>
       );
     }
 
     return (
-      <tr>
-        <td>
-          <img src={ride.user.avatar} className="img-circle" alt="tbl" />
-        </td>
-        <td className="bv_verticalmiddle">{ride.user.name}</td>
-        <td className="bv_verticalmiddle">
-          <Moment format="DD/MM/YYYY">{ride.date}</Moment>
-        </td>
-        <td className="bv_verticalmiddle">
-          {ride.from}
-          <i className="fas fa-arrow-right m-l-5 m-r-5" />
-          {ride.to}
-        </td>
+      this.state.showRide && (
+        <tr>
+          <td>
+            <img src={ride.user.avatar} className="img-circle" alt="tbl" />
+          </td>
+          <td className="bv_verticalmiddle">{ride.user.name}</td>
+          <td className="bv_verticalmiddle">
+            <Moment format="DD/MM/YYYY">{ride.date}</Moment>
+          </td>
+          <td className="bv_verticalmiddle">
+            {ride.from}
+            <i className="fas fa-arrow-right m-l-5 m-r-5" />
+            {ride.to}
+          </td>
 
-        <td className="faq-table-btn bv_verticalmiddle">{buttons}</td>
-      </tr>
+          <td className="faq-table-btn bv_verticalmiddle">{buttons}</td>
+        </tr>
+      )
     );
   }
 }
@@ -83,5 +102,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addRideToCarByUserId }
+  { addRideToCarByUserId, deleteRide }
 )(RideItem);

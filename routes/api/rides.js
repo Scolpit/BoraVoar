@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const IsEmpty = require("../../validation/is-empty");
 
 const Ride = require("../../models/Ride");
 
@@ -41,16 +42,31 @@ router.post(
     const { errors, isValid } = validateRideInput(req.body);
     if (!isValid) return res.status(400).json(errors);
 
-    const newRide = new Ride({
-      from: req.body.from,
-      to: req.body.to,
-      date: req.body.date,
-      user: req.user.id
-    });
+    //Check if already exists for this date
 
-    newRide.save().then(ride => {
-      res.json(ride);
-    });
+    checkIfRideExists(req.body.date, req.user.id)
+      .then(alreadyexists => {
+        if (alreadyexists) {
+          errors.date = "Já criou um pedido de boleia para esta data";
+          res.status(400).json(errors);
+        } else {
+          const newRide = new Ride({
+            from: req.body.from,
+            to: req.body.to,
+            date: req.body.date,
+            user: req.user.id
+          });
+
+          newRide.save().then(ride => {
+            res.json(ride);
+          });
+        }
+      })
+      .catch(err => {
+        res
+          .status(404)
+          .json({ alreadyexists: "Já criou uma boleia para esta data" });
+      });
   }
 );
 
@@ -79,5 +95,23 @@ router.delete(
       .catch(err => res.status(401).json({ noridefound: "Not authorized" }));
   }
 );
+
+function getRideByDate(date, userid) {
+  return new Promise(resolve => {
+    Ride.findOne({ date: date, user: userid })
+      .then(ride => {
+        let isempty = !IsEmpty(ride);
+        resolve(isempty);
+      })
+      .catch(err => {
+        resolve(false);
+      });
+  });
+}
+
+async function checkIfRideExists(date, userid) {
+  const result = await getRideByDate(date, userid);
+  return result;
+}
 
 module.exports = router;
