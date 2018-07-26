@@ -26,6 +26,14 @@ body {
   color: white;
 }
 
+.margin-0-15 {
+  margin: 0px 15px;
+}
+
+.font-size-28 {
+  font-size: 28px !important;
+}
+
 .main-header-top .logo {
   font-size: 28px !important;
 }
@@ -88,6 +96,12 @@ body {
     padding-top: 200px;
     font-size: 50px;
     padding-bottom: 165px;
+  }
+}
+
+@media (max-width: 766px) {
+  .main-header {
+    margin-top: 50px !important;
   }
 }
 

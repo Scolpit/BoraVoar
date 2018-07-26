@@ -3,32 +3,32 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getCarCount } from "../../actions/carActions";
+import { getRideCount } from "../../actions/rideActions";
 
-export class CounterWidgetCars extends Component {
+export class CounterWidgetRides extends Component {
   static propTypes = {
-    car: PropTypes.object.isRequired,
-    getCarCount: PropTypes.func.isRequired
+    ride: PropTypes.object.isRequired,
+    getRideCount: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getCarCount();
+    this.props.getRideCount();
   }
 
   render() {
-    const { countLoading, count } = this.props.car;
+    const { countLoading, count } = this.props.ride;
 
     let counterDisplay;
     if (countLoading) {
       counterDisplay = (
         <div className="col-lg-6 col-sm-6">
           <div className="col-sm-12 card dashboard-product">
-            <span>Viaturas disponiveis</span>
+            <span>Pedidos de boleia</span>
             <h2 className="dashboard-total-products counter">
               <i className="fas fa-spinner fa-spin font-size-28" />
             </h2>
-            <div className="side-box bg-warning">
-              <i className="fas fa-car" />
+            <div className="side-box bg-primary">
+              <i className="fas fa-parachute-box" />
             </div>
           </div>
         </div>
@@ -36,9 +36,9 @@ export class CounterWidgetCars extends Component {
     } else {
       counterDisplay = (
         <div className="col-lg-6 col-sm-6">
-          <Link to="/CarList">
+          <Link to="/RideList">
             <div className="col-sm-12 card dashboard-product">
-              <span>Viaturas disponiveis</span>
+              <span>Pedidos de boleia</span>
               <h2 className="dashboard-total-products counter">
                 {isNaN(count) ? (
                   <i className="fas fa-spinner fa-spin font-size-28" />
@@ -46,8 +46,8 @@ export class CounterWidgetCars extends Component {
                   count
                 )}
               </h2>
-              <div className="side-box bg-warning">
-                <i className="fas fa-car" />
+              <div className="side-box bg-primary">
+                <i className="fas fa-parachute-box" />
               </div>
             </div>
           </Link>
@@ -60,10 +60,10 @@ export class CounterWidgetCars extends Component {
 }
 
 const mapStateToProps = state => ({
-  car: state.car
+  ride: state.ride
 });
 
 export default connect(
   mapStateToProps,
-  { getCarCount }
-)(CounterWidgetCars);
+  { getRideCount }
+)(CounterWidgetRides);

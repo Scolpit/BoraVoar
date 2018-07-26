@@ -1,8 +1,15 @@
-import { GET_RIDES, SET_RIDE_LOADING } from "../actions/types";
+import {
+  GET_RIDES,
+  SET_RIDE_LOADING,
+  GET_RIDE_COUNT,
+  SET_RIDE_COUNT_LOADING
+} from "../actions/types";
 
 const initialState = {
   rides: [],
-  loading: false
+  loading: false,
+  countLoading: false,
+  count: 0
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +24,17 @@ export default function(state = initialState, action) {
         ...state,
         rides: action.payload,
         loading: false
+      };
+    case GET_RIDE_COUNT:
+      return {
+        ...state,
+        count: action.payload,
+        countLoading: false
+      };
+    case SET_RIDE_COUNT_LOADING:
+      return {
+        ...state,
+        countLoading: true
       };
     default:
       return state;

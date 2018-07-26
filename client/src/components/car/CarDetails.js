@@ -30,15 +30,17 @@ export class CarDetails extends Component {
       carDetails = (
         <div>
           <CarItem car={car} editable={true} />
-          <RideTable
-            rides={car.ridesByDate}
-            tableTitle={`Pedidos de boleia para dia ${car.date.substring(
-              0,
-              10
-            )}`}
-            isDetailsPage={true}
-            isAdmin={car.user._id === user.id}
-          />
+          <div className="margin-0-15">
+            <RideTable
+              rides={car.ridesByDate}
+              tableTitle={`Pedidos de boleia para dia ${car.date.substring(
+                0,
+                10
+              )}`}
+              isDetailsPage={true}
+              isAdmin={car.user._id === user.id}
+            />
+          </div>
         </div>
       );
     }

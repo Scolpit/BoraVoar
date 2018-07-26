@@ -1,5 +1,11 @@
 import axios from "axios";
-import { GET_ERRORS, GET_RIDES, SET_RIDE_LOADING } from "./types";
+import {
+  GET_ERRORS,
+  GET_RIDES,
+  SET_RIDE_LOADING,
+  GET_RIDE_COUNT,
+  SET_RIDE_COUNT_LOADING
+} from "./types";
 import { toast } from "react-toastify";
 
 //Get Rides List
@@ -31,6 +37,25 @@ export const getRidesByDate = date => dispatch => {
     .then(res => {
       dispatch({
         type: GET_RIDES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+//Get Ride Count
+export const getRideCount = () => dispatch => {
+  dispatch(setRideCountLoading());
+  axios
+    .get("/api/rides/count/count")
+    .then(res => {
+      dispatch({
+        type: GET_RIDE_COUNT,
         payload: res.data
       });
     })
@@ -81,5 +106,12 @@ export const deleteRide = id => dispatch => {
 export const setRideLoading = () => {
   return {
     type: SET_RIDE_LOADING
+  };
+};
+
+// Set Count Loading
+export const setRideCountLoading = () => {
+  return {
+    type: SET_RIDE_COUNT_LOADING
   };
 };

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import CounterWidget from "../common/CounterWidget";
 import CounterWidgetCars from "../common/CounterWidgetCars";
+import CounterWidgetRides from "../common/CounterWidgetRides";
 import NavBar from "../layout/Navbar";
 import RideTable from "./RideTable";
 
@@ -34,13 +34,7 @@ export class RideList extends Component {
             </div>
             <div className="row m-b-30 dashboard-header">
               <CounterWidgetCars />
-              <CounterWidget
-                to="RideList"
-                label="Pedidos de boleia"
-                counter="12"
-                color="bg-primary"
-                icon="fas fa-parachute-box"
-              />
+              <CounterWidgetRides />
             </div>
 
             <RideTable

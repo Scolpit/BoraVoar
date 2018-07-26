@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { getCars } from "../../actions/carActions";
 
 import NavBar from "../layout/Navbar";
-import CounterWidget from "../common/CounterWidget";
 import CounterWidgetCars from "../common/CounterWidgetCars";
+import CounterWidgetRides from "../common/CounterWidgetRides";
 import CarItem from "./CarItem";
 import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 
@@ -58,13 +58,7 @@ export class CarList extends Component {
 
             <div className="row m-b-30 dashboard-header">
               <CounterWidgetCars />
-              <CounterWidget
-                to="RideList"
-                label="Pedidos de boleia"
-                counter="12"
-                color="bg-primary"
-                icon="fas fa-parachute-box"
-              />
+              <CounterWidgetRides />
             </div>
             {carList}
           </div>
