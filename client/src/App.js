@@ -19,6 +19,7 @@ import CarCreate from "./components/car/CarCreate";
 import CarDetails from "./components/car/CarDetails";
 import RideCreate from "./components/ride/RideCreate";
 import RideList from "./components/ride/RideList";
+import Profile from "./components/profile/Profile";
 
 import "./App.css";
 
@@ -47,6 +48,9 @@ class App extends Component {
             <Route exact path="/CarList" component={CarList} />
             <Route exact path="/RideList" component={RideList} />
             <Route exact path="/CarDetails/:id" component={CarDetails} />
+            <Switch>
+              <PrivateRoute exact path="/Profile" component={Profile} />
+            </Switch>
             <Switch>
               <PrivateRoute exact path="/CarCreate" component={CarCreate} />
             </Switch>

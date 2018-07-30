@@ -141,7 +141,7 @@ router.post(
             });
           });
         } else {
-          errors.password = "Invalid password";
+          errors.oldpassword = "Password inválida";
           return res.status(404).json(errors);
         }
       });
