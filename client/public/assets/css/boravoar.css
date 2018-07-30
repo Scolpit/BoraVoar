@@ -89,6 +89,11 @@ body {
   vertical-align: middle !important;
 }
 
+.chat_user_name {
+  font-weight: bold !important;
+  margin-bottom: -20px !important;
+}
+
 /* Full car */
 .fullcar {
   position: absolute;
