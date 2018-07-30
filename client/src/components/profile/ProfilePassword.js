@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { changePassword } from "../../actions/profileActions";
 import TextFieldGroup from "../common/TextFieldGroup";
@@ -35,7 +36,12 @@ export class ProfilePassword extends Component {
     e.preventDefault();
 
     const { oldpassword, newpassword, newpassword2 } = this.state;
-    this.props.changePassword(oldpassword, newpassword, newpassword2);
+    this.props.changePassword(
+      oldpassword,
+      newpassword,
+      newpassword2,
+      this.props.history
+    );
   }
 
   onChange(e) {
@@ -95,4 +101,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { changePassword }
-)(ProfilePassword);
+)(withRouter(ProfilePassword));

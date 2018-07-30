@@ -1,9 +1,17 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from "./types";
+
+// Clear Errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};
 
 //Change profile info
 export const changeProfileInfo = name => dispatch => {
+  dispatch(clearErrors());
   const userData = {
     name: name
   };
@@ -29,7 +37,8 @@ export const changeProfileInfo = name => dispatch => {
 export const changePassword = (
   oldpassword,
   newpassword,
-  newpassword2
+  newpassword2,
+  history
 ) => dispatch => {
   const userData = {
     oldpassword: oldpassword,
@@ -37,10 +46,12 @@ export const changePassword = (
     newpassword2: newpassword2
   };
 
+  dispatch(clearErrors());
   axios
     .post("api/users/changepassword", userData)
     .then(res => {
       toast.success("Password alterada com sucesso");
+      history.push("/CarList");
     })
     .catch(err => {
       dispatch({
