@@ -11,6 +11,7 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 const validateChangePasswordInput = require("../../validation/changepassword");
+const validateChangeNameInput = require("../../validation/changename");
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -102,7 +103,7 @@ router.post("/login", (req, res) => {
 });
 
 // @route   POST api/users/changepassword
-// @desc    Login user / return token
+// @desc    Change Password
 // @access  Private
 router.post(
   "/changepassword",
@@ -144,6 +145,40 @@ router.post(
           return res.status(404).json(errors);
         }
       });
+    });
+  }
+);
+
+// @route   POST api/users/changename
+// @desc    Change User Name
+// @access  Private
+router.post(
+  "/changename",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateChangeNameInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const { name } = req.body;
+
+    User.findById(req.user.id).then(user => {
+      if (!user) {
+        errors.email = "User not found";
+        return res.status(404).json(errors);
+      }
+
+      user.name = name;
+      user
+        .save()
+        .then(user => {
+          return res.json(user);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 );

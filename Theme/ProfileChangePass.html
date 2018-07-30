@@ -784,16 +784,15 @@
                 <!-- Header end -->
                 <div class="row">
                     <div class="col-xl-3 col-lg-4">
+                        <!-- Avatar e alterar foto -->
                         <div class="card faq-left">
                             <div class="social-profile">
                                 <img class="img-fluid" src="assets/images/social/profile.jpg" alt="">
-                                <div class="profile-hvr m-t-15">
-                                    <i class="icofont icofont-ui-edit p-r-10 c-pointer"></i>
-                                    <i class="icofont icofont-ui-delete c-pointer"></i>
-                                </div>
                             </div>
-                            <div class="card-block">
+                            <div class="card-block" align="center">
                                 <h4 class="f-18 f-normal m-b-10 txt-primary">Josephin Villa</h4>
+                                <a href="#" class="width-100p m-t-6 btn btn-success waves-effect waves-light m-r-30">Alterar imagem*</a>
+                                <p class="m-t-10 font-size-11">*A alteração da foto é feita pelo site gravatar.com</p>
                             </div>
                         </div>
                         <!-- end of card-block -->
@@ -804,7 +803,24 @@
                     <!-- start col-lg-9 -->
                     <div class="col-xl-9 col-lg-8">
 
+                        <!-- Perfil -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text">Perfil</h5>
 
+                            </div>
+                            <div class="card-block">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail" class="form-control-label">Nome</label>
+                                        <input type="text" class="form-control" name="name" id="name">
+                                    </div>
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-30">Guardar Alterações</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Alterar Password -->
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-header-text">Alterar Password</h5>
@@ -814,27 +830,24 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="exampleInputEmail" class="form-control-label">Password antiga</label>
-                                        <input type="text" class="form-control" id="origin" placeholder="Lisboa">
+                                        <input type="password" class="form-control" name="" id="oldpassword">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail" class="form-control-label">Nova Password</label>
-                                        <input type="text" class="form-control" id="destination" placeholder="Castelo de Vide">
+                                        <input type="password" class="form-control" name="newpassword" id="newpassword">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail" class="form-control-label">Confirmação da nova Password
                                         </label>
-                                        <input type="date" class="form-control" id="date" placeholder="">
+                                        <input type="password" class="form-control" name="newpassword2" id="newpassword2">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail" class="form-control-label">Descrição</label>
-                                        <textarea class="form-control" rows="6" id="description" placeholder="Ponto de encontro no AKI do montijo às 8:30"></textarea>
-                                    </div>
-
 
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-30">Submeter</button>
                                 </form>
                             </div>
                         </div>
+
+
                     </div>
 
                 </div>
