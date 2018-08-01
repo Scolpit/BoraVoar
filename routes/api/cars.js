@@ -30,6 +30,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   Car.findById(req.params.id)
     .populate("user", ["name", "avatar"])
+    .populate("chat.user", ["name", "avatar"])
     .then(car => {
       let dte = new Date(car.date.getTime());
       dte.setDate(dte.getDate() + 1);
@@ -100,6 +101,7 @@ router.post(
 
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .populate("user", ["name", "avatar"])
+      .populate("chat.user", ["name", "avatar"])
       .then(car => {
         //Check if pilot is already added to car
         ridenotexist =
@@ -153,6 +155,7 @@ router.post(
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .populate("user", ["name", "avatar"])
+      .populate("chat.user", ["name", "avatar"])
       .then(car => {
         User.findById(req.params.userid)
           .then(user => {
@@ -213,6 +216,7 @@ router.post(
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .populate("user", ["name", "avatar"])
+      .populate("chat.user", ["name", "avatar"])
       .then(car => {
         car.full = req.body.full;
         car.save().then(car => {
@@ -270,6 +274,7 @@ router.delete(
   (req, res) => {
     Car.findOne({ _id: req.params.carid, user: req.user.id })
       .populate("user", ["name", "avatar"])
+      .populate("chat.user", ["name", "avatar"])
       .then(car => {
         const removeIndex = car.rides
           .map(item => item.id)
