@@ -4,11 +4,14 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 
 import ChatItem from "./ChatItem";
+import { addChatToCar } from "../../actions/chatActions";
 
 export class ChatWidget extends Component {
   static propTypes = {
     chats: PropTypes.array.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    addChatToCar: PropTypes.func.isRequired,
+    carid: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -24,7 +27,8 @@ export class ChatWidget extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    //this.props.changeProfileInfo(this.state.name);
+    this.props.addChatToCar(this.state.text, this.props.carid);
+    this.setState({ text: "" });
   }
 
   onChange(e) {
@@ -33,7 +37,7 @@ export class ChatWidget extends Component {
 
   render() {
     const chatList = this.props.chats.map(chat => (
-      <ChatItem key={chat._id} chat={chat} user={this.props.auth.user} />
+      <ChatItem key={chat._id} chat={chat} />
     ));
 
     return (
@@ -42,7 +46,7 @@ export class ChatWidget extends Component {
         {chatList}
         <div className="media chat-messages padding-20">
           <div className="md-input-wrapper">
-            <form>
+            <form noValidate onSubmit={this.onSubmit}>
               <input
                 type="text"
                 className={classnames("md-form-control", {
@@ -57,7 +61,7 @@ export class ChatWidget extends Component {
               <span className="highlight" />
               <span className="bar" />
               <button
-                type="button"
+                type="submit"
                 className="chat-send waves-effect waves-light"
               >
                 <i className="fas fa-paper-plane" />
@@ -74,4 +78,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(ChatWidget);
+export default connect(
+  mapStateToProps,
+  { addChatToCar }
+)(ChatWidget);

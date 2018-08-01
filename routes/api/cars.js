@@ -259,7 +259,12 @@ router.post(
 
         // Add to rides array
         car.chat.push(newChat);
-        car.save().then(car => res.json(car));
+        car.save().then(car => {
+          Car.findOne({ _id: car._id })
+            .populate("user", ["name", "avatar"])
+            .populate("chat.user", ["name", "avatar"])
+            .then(car => res.json(car));
+        });
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
   }
@@ -318,6 +323,8 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Car.findOne({ _id: req.params.carid })
+      .populate("user", ["name", "avatar"])
+      .populate("chat.user", ["name", "avatar"])
       .then(car => {
         const removeIndex = car.chat
           .map(item => item.id)

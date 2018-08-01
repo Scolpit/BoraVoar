@@ -32,7 +32,7 @@ export class CarDetails extends Component {
         <div>
           <CarItem car={car} editable={true} />
           <div className="col-xl-6 col-lg-12">
-            <ChatWidget chats={car.chat} />
+            <ChatWidget chats={car.chat} carid={car._id} />
           </div>
           <div className="margin-0-15">
             <RideTable

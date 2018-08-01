@@ -73,7 +73,7 @@ export class Navbar extends Component {
         </li>
         <li>
           <Link to="/Register">
-            <i class="fas fa-sign-in-alt" /> Register
+            <i className="fas fa-sign-in-alt" /> Register
           </Link>
         </li>
       </div>
