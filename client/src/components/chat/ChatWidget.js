@@ -36,17 +36,19 @@ export class ChatWidget extends Component {
   }
 
   render() {
+    const { carid } = this.props;
+
     const chatList = this.props.chats.map(chat => (
-      <ChatItem key={chat._id} chat={chat} />
+      <ChatItem key={chat._id} chat={chat} carid={carid} />
     ));
 
     return (
       <div className="card">
         <div className="media chat-inner-header">Chat</div>
         {chatList}
-        <div className="media chat-messages padding-20">
-          <div className="md-input-wrapper">
-            <form noValidate onSubmit={this.onSubmit}>
+        <div className="media chat-messages padding-20 m-t-20">
+          <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
+            <div className="md-input-wrapper">
               <input
                 type="text"
                 className={classnames("md-form-control", {
@@ -60,14 +62,15 @@ export class ChatWidget extends Component {
               <label>Insira um comentário</label>
               <span className="highlight" />
               <span className="bar" />
+
               <button
                 type="submit"
                 className="chat-send waves-effect waves-light"
               >
                 <i className="fas fa-paper-plane" />
               </button>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     );

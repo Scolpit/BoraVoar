@@ -21,3 +21,23 @@ export const addChatToCar = (text, carid) => dispatch => {
       })
     );
 };
+
+//Delete chat from car
+export const deleteChatFromCar = (chatid, carid) => dispatch => {
+  if (window.confirm("Tem a certeza que deseja eliminar a mensagem?")) {
+    axios
+      .delete(`/api/cars/${carid}/chat/${chatid}`)
+      .then(res => {
+        dispatch({
+          type: GET_CAR,
+          payload: res.data
+        });
+      })
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
+};

@@ -69,7 +69,7 @@ export class Login extends Component {
                     <b>V</b>oar
                   </div>
                   <h3 className="text-center txt-primary">Login</h3>
-                  <form noValidate onSubmit={this.onSubmit}>
+                  <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
                     <TextFieldGoogleGroup
                       label="Email"
                       name="email"

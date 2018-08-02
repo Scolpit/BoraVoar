@@ -94,6 +94,17 @@ body {
   margin-bottom: -20px !important;
 }
 
+.media.chat-messages {
+  padding: 2px 20px;
+}
+
+.times-delete-chat {
+  float: right;
+  padding: 3px;
+  margin: 8px;
+  color: white;
+}
+
 /* Full car */
 .fullcar {
   position: absolute;

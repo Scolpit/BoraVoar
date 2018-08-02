@@ -211,7 +211,7 @@ export class CarItem extends Component {
             {carOwner && (
               <div className="user-block-2-activities">
                 <div className="form-group row">
-                  <form onSubmit={this.onSubmit}>
+                  <form autoComplete="off" onSubmit={this.onSubmit}>
                     <div className="col-sm-8 col-xs-6">
                       <input
                         className="form-control"

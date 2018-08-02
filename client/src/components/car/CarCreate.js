@@ -74,7 +74,7 @@ export class CarCreate extends Component {
                     </h5>
                   </div>
                   <div className="card-block">
-                    <form onSubmit={this.onSubmit}>
+                    <form autoComplete="off" onSubmit={this.onSubmit}>
                       <TextFieldGroup
                         label="Origem"
                         name="from"

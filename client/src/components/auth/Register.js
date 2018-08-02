@@ -74,7 +74,7 @@ export class Register extends Component {
                     <b>V</b>oar
                   </div>
                   <h3 className="text-center txt-primary">Registo</h3>
-                  <form noValidate onSubmit={this.onSubmit}>
+                  <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
                     <TextFieldGoogleGroup
                       label="Nome"
                       name="name"

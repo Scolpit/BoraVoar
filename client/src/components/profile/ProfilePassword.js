@@ -55,7 +55,7 @@ export class ProfilePassword extends Component {
           <h5 className="card-header-text">Alterar Password</h5>
         </div>
         <div className="card-block">
-          <form noValidate onSubmit={this.onSubmit}>
+          <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
             <TextFieldGroup
               label="Password atual"
               type="password"

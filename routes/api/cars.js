@@ -341,7 +341,25 @@ router.delete(
         ) {
           car.chat.splice(removeIndex, 1);
 
-          car.save().then(car => res.json(car));
+          car.save().then(car => {
+            let dte = new Date(car.date.getTime());
+            dte.setDate(dte.getDate() + 1);
+
+            Ride.find({
+              date: {
+                $gte: car.date,
+                $lt: dte
+              }
+            })
+              .populate("user", ["name", "avatar"])
+              .then(rides => {
+                car.ridesByDate = rides;
+                res.json(car);
+              })
+              .catch(err => {
+                res.json(car);
+              });
+          });
         } else {
           return res.json({ messageotherperson: "Not authorized" });
         }
