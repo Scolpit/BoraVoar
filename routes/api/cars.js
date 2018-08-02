@@ -9,6 +9,26 @@ const Ride = require("../../models/Ride");
 const validateCarInput = require("../../validation/car");
 const validateCarInviteRideInput = require("../../validation/carinviteride");
 
+function returnCarWithRides(car, res) {
+  let dte = new Date(car.date.getTime());
+  dte.setDate(dte.getDate() + 1);
+
+  Ride.find({
+    date: {
+      $gte: car.date,
+      $lt: dte
+    }
+  })
+    .populate("user", ["name", "avatar"])
+    .then(rides => {
+      car.ridesByDate = rides;
+      res.json(car);
+    })
+    .catch(err => {
+      res.json(car);
+    });
+}
+
 // @route   GET api/cars
 // @desc    Get cars
 // @access  Public
@@ -31,25 +51,7 @@ router.get("/:id", (req, res) => {
   Car.findById(req.params.id)
     .populate("user", ["name", "avatar"])
     .populate("chat.user", ["name", "avatar"])
-    .then(car => {
-      let dte = new Date(car.date.getTime());
-      dte.setDate(dte.getDate() + 1);
-
-      Ride.find({
-        date: {
-          $gte: car.date,
-          $lt: dte
-        }
-      })
-        .populate("user", ["name", "avatar"])
-        .then(rides => {
-          car.ridesByDate = rides;
-          res.json(car);
-        })
-        .catch(err => {
-          res.json(car);
-        });
-    })
+    .then(car => returnCarWithRides(car, res))
     .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
 });
 
@@ -263,7 +265,25 @@ router.post(
           Car.findOne({ _id: car._id })
             .populate("user", ["name", "avatar"])
             .populate("chat.user", ["name", "avatar"])
-            .then(car => res.json(car));
+            .then(car => {
+              let dte = new Date(car.date.getTime());
+              dte.setDate(dte.getDate() + 1);
+
+              Ride.find({
+                date: {
+                  $gte: car.date,
+                  $lt: dte
+                }
+              })
+                .populate("user", ["name", "avatar"])
+                .then(rides => {
+                  car.ridesByDate = rides;
+                  res.json(car);
+                })
+                .catch(err => {
+                  res.json(car);
+                });
+            });
         });
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
@@ -336,8 +356,8 @@ router.delete(
 
         //Only car owner or message owner can delete message
         if (
-          car.user == req.user.id ||
-          car.chat[removeIndex].user == req.user.id
+          car.user._id == req.user.id ||
+          car.chat[removeIndex].user._id == req.user.id
         ) {
           car.chat.splice(removeIndex, 1);
 
