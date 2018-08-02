@@ -25,6 +25,18 @@ export class ChatWidget extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   onSubmit(e) {
     e.preventDefault();
     this.props.addChatToCar(this.state.text, this.props.carid);
@@ -45,7 +57,15 @@ export class ChatWidget extends Component {
     return (
       <div className="card">
         <div className="media chat-inner-header">Chat</div>
-        {chatList}
+        <div className="chat-items-group scrollbar">
+          {chatList}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+        </div>
         <div className="media chat-messages padding-20 m-t-20">
           <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
             <div className="md-input-wrapper">

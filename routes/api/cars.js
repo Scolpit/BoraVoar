@@ -119,25 +119,7 @@ router.post(
           // Add to rides array
           car.rides.push(newRide);
 
-          car.save().then(car => {
-            let dte = new Date(car.date.getTime());
-            dte.setDate(dte.getDate() + 1);
-
-            Ride.find({
-              date: {
-                $gte: car.date,
-                $lt: dte
-              }
-            })
-              .populate("user", ["name", "avatar"])
-              .then(rides => {
-                car.ridesByDate = rides;
-                res.json(car);
-              })
-              .catch(err => {
-                res.json(car);
-              });
-          });
+          car.save().then(car => returnCarWithRides(car, res));
         } else {
           res.status(404).json({ nocarsfound: "Piloto já adicionado" });
         }
@@ -176,25 +158,7 @@ router.post(
               // Add to rides array
               car.rides.push(newRide);
 
-              car.save().then(car => {
-                let dte = new Date(car.date.getTime());
-                dte.setDate(dte.getDate() + 1);
-
-                Ride.find({
-                  date: {
-                    $gte: car.date,
-                    $lt: dte
-                  }
-                })
-                  .populate("user", ["name", "avatar"])
-                  .then(rides => {
-                    car.ridesByDate = rides;
-                    res.json(car);
-                  })
-                  .catch(err => {
-                    res.json(car);
-                  });
-              });
+              car.save().then(car => returnCarWithRides(car, res));
             } else {
               return res
                 .status(404)
@@ -221,25 +185,7 @@ router.post(
       .populate("chat.user", ["name", "avatar"])
       .then(car => {
         car.full = req.body.full;
-        car.save().then(car => {
-          let dte = new Date(car.date.getTime());
-          dte.setDate(dte.getDate() + 1);
-
-          Ride.find({
-            date: {
-              $gte: car.date,
-              $lt: dte
-            }
-          })
-            .populate("user", ["name", "avatar"])
-            .then(rides => {
-              car.ridesByDate = rides;
-              res.json(car);
-            })
-            .catch(err => {
-              res.json(car);
-            });
-        });
+        car.save().then(car => returnCarWithRides(car, res));
       })
       .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
   }
@@ -265,25 +211,7 @@ router.post(
           Car.findOne({ _id: car._id })
             .populate("user", ["name", "avatar"])
             .populate("chat.user", ["name", "avatar"])
-            .then(car => {
-              let dte = new Date(car.date.getTime());
-              dte.setDate(dte.getDate() + 1);
-
-              Ride.find({
-                date: {
-                  $gte: car.date,
-                  $lt: dte
-                }
-              })
-                .populate("user", ["name", "avatar"])
-                .then(rides => {
-                  car.ridesByDate = rides;
-                  res.json(car);
-                })
-                .catch(err => {
-                  res.json(car);
-                });
-            });
+            .then(car => returnCarWithRides(car, res));
         });
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
@@ -311,25 +239,7 @@ router.delete(
 
         car.rides.splice(removeIndex, 1);
 
-        car.save().then(car => {
-          let dte = new Date(car.date.getTime());
-          dte.setDate(dte.getDate() + 1);
-
-          Ride.find({
-            date: {
-              $gte: car.date,
-              $lt: dte
-            }
-          })
-            .populate("user", ["name", "avatar"])
-            .then(rides => {
-              car.ridesByDate = rides;
-              res.json(car);
-            })
-            .catch(err => {
-              res.json(car);
-            });
-        });
+        car.save().then(car => returnCarWithRides(car, res));
       })
       .catch(err => res.status(401).json({ carnotfound: "Not authorized" }));
   }
@@ -361,25 +271,7 @@ router.delete(
         ) {
           car.chat.splice(removeIndex, 1);
 
-          car.save().then(car => {
-            let dte = new Date(car.date.getTime());
-            dte.setDate(dte.getDate() + 1);
-
-            Ride.find({
-              date: {
-                $gte: car.date,
-                $lt: dte
-              }
-            })
-              .populate("user", ["name", "avatar"])
-              .then(rides => {
-                car.ridesByDate = rides;
-                res.json(car);
-              })
-              .catch(err => {
-                res.json(car);
-              });
-          });
+          car.save().then(car => returnCarWithRides(car, res));
         } else {
           return res.json({ messageotherperson: "Not authorized" });
         }

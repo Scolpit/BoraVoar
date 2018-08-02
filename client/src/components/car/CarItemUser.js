@@ -55,7 +55,7 @@ export class CarItemUser extends Component {
             disabled
             className="btn btn-danger waves-effect waves-light text-uppercase float-right margin-top--9"
           >
-            <i class="fas fa-spinner fa-spin" /> Eliminar
+            <i className="fas fa-spinner fa-spin" /> Eliminar
           </button>
         );
       }
