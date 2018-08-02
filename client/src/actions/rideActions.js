@@ -85,21 +85,23 @@ export const rideCreate = (rideData, history) => dispatch => {
 
 //Delete ride by id
 export const deleteRide = id => dispatch => {
-  axios
-    .delete(`/api/rides/${id}`)
-    .then(res => {
-      toast.warning("Pedido de boleia eliminado");
-      dispatch({
-        type: GET_RIDES,
-        payload: res.data
+  if (window.confirm("Tem a certeza que deseja eliminar este pedido?")) {
+    axios
+      .delete(`/api/rides/${id}`)
+      .then(res => {
+        toast.warning("Pedido de boleia eliminado");
+        dispatch({
+          type: GET_RIDES,
+          payload: res.data
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
       });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
-    });
+  }
 };
 
 // Set Loading

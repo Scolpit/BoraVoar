@@ -25,22 +25,19 @@ export class ChatWidget extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-  };
-
   componentDidMount() {
-    this.scrollToBottom();
+    this.el.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  // componentDidUpdate() {
+  //   this.el.scrollIntoView({ behavior: "smooth" });
+  // }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.addChatToCar(this.state.text, this.props.carid);
     this.setState({ text: "" });
+    this.el.scrollIntoView({ behavior: "smooth" });
   }
 
   onChange(e) {
@@ -60,9 +57,8 @@ export class ChatWidget extends Component {
         <div className="chat-items-group scrollbar">
           {chatList}
           <div
-            style={{ float: "left", clear: "both" }}
             ref={el => {
-              this.messagesEnd = el;
+              this.el = el;
             }}
           />
         </div>
