@@ -28,6 +28,18 @@ module.exports = function validateRideInput(data) {
     errors.date = "Campo obrigatório";
   }
 
+  let dte = new Date();
+  let ridedate = new Date(data.date);
+
+  if (dte > ridedate) {
+    errors.date = "Não é permitido o pedido para o passado";
+  }
+
+  dte.setDate(dte.getDate() + 90);
+  if (dte < ridedate) {
+    errors.date = "Não é permitido o pedido com mais de 3 meses";
+  }
+
   return {
     errors,
     isValid: isEmpty(errors)

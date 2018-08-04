@@ -160,14 +160,10 @@ router.post(
 
               car.save().then(car => returnCarWithRides(car, res));
             } else {
-              return res
-                .status(404)
-                .json({ fbm_error: "Piloto já adicionado" });
+              return res.status(404).json({ warning: "Piloto já adicionado" });
             }
           })
-          .catch(err =>
-            res.status(404).json({ nouserfound: "User not found" })
-          );
+          .catch(err => res.status(404).json({ error: "User not found" }));
       })
       .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
   }

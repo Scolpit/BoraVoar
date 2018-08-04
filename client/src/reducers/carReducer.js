@@ -26,6 +26,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cars: action.payload,
+        count: action.payload.length,
         loading: false
       };
     case GET_CAR:

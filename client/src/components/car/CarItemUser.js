@@ -24,12 +24,9 @@ export class CarItemUser extends Component {
   };
 
   deleteRider(carid, rideid) {
-    if (
-      window.confirm("Tem a certeza que deseja retirar da lista este piloto?")
-    ) {
+    if (this.props.deleteRideFromCar(carid, rideid)) {
       this.setState({ showUser: false });
       toast.warning("Piloto removido");
-      this.props.deleteRideFromCar(carid, rideid);
     }
   }
 

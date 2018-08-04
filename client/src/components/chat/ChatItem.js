@@ -24,8 +24,9 @@ export class ChatItem extends Component {
   }
 
   onDelete() {
-    this.setState({ isDeleted: true });
-    this.props.deleteChatFromCar(this.props.chat._id, this.props.carid);
+    if (this.props.deleteChatFromCar(this.props.chat._id, this.props.carid)) {
+      this.setState({ isDeleted: true });
+    }
   }
 
   render() {

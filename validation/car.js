@@ -37,6 +37,18 @@ module.exports = function validateCarInput(data) {
     errors.description = "Campo obrigatório";
   }
 
+  let dte = new Date();
+  let cardate = new Date(data.date);
+
+  if (dte > cardate) {
+    errors.date = "Não é permitido o pedido para o passado";
+  }
+
+  dte.setDate(dte.getDate() + 90);
+  if (dte < cardate) {
+    errors.date = "Não é permitido o pedido com mais de 3 meses";
+  }
+
   return {
     errors,
     isValid: isEmpty(errors)

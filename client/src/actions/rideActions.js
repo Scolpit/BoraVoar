@@ -101,6 +101,9 @@ export const deleteRide = id => dispatch => {
           payload: err.response.data
         });
       });
+    return true;
+  } else {
+    return false;
   }
 };
 

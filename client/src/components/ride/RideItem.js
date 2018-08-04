@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
-import { toast } from "react-toastify";
 
 import { addRideToCarByUserId } from "../../actions/carActions";
 import { deleteRide } from "../../actions/rideActions";
@@ -30,13 +29,13 @@ export class RideItem extends Component {
     const { car, ride } = this.props;
 
     this.props.addRideToCarByUserId(car.car._id, ride.user._id);
-    toast.success("Piloto adicionado com sucesso");
   }
 
   btnDeleteRide() {
     const { ride } = this.props;
-    this.setState({ showRide: false });
-    this.props.deleteRide(ride._id);
+    if (this.props.deleteRide(ride._id)) {
+      this.setState({ showRide: false });
+    }
   }
 
   render() {

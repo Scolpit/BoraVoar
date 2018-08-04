@@ -39,5 +39,8 @@ export const deleteChatFromCar = (chatid, carid) => dispatch => {
           payload: err.response.data
         })
       );
+    return true;
+  } else {
+    return false;
   }
 };

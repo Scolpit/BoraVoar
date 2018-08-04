@@ -23,6 +23,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         rides: action.payload,
+        count: action.payload.length,
         loading: false
       };
     case GET_RIDE_COUNT:

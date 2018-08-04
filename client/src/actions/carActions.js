@@ -48,12 +48,14 @@ export const addRideToCarByUserId = (carid, userid) => dispatch => {
   axios
     .post(`/api/cars/${carid}/ride/${userid}`)
     .then(res => {
+      toast.success("Piloto adicionado com sucesso");
       dispatch({
         type: GET_CAR,
         payload: res.data
       });
     })
     .catch(err => {
+      toast.warning(err.response.data.warning);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -139,20 +141,25 @@ export const getCarCount = () => dispatch => {
 
 //Delete Ride from Car
 export const deleteRideFromCar = (carid, rideid) => dispatch => {
-  axios
-    .delete(`/api/cars/${carid}/ride/${rideid}`)
-    .then(res => {
-      dispatch({
-        type: GET_CAR,
-        payload: res.data
+  if (window.confirm("Tem a certeza que deseja retirar o piloto da lista?")) {
+    axios
+      .delete(`/api/cars/${carid}/ride/${rideid}`)
+      .then(res => {
+        dispatch({
+          type: GET_CAR,
+          payload: res.data
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
       });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
-    });
+    return true;
+  } else {
+    return false;
+  }
 };
 
 //Delete car
@@ -170,6 +177,9 @@ export const deleteCar = (carid, history) => dispatch => {
           payload: err.response.data
         })
       );
+    return true;
+  } else {
+    return false;
   }
 };
 
