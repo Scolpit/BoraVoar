@@ -164,12 +164,6 @@ export class Navbar extends Component {
                   icon="fas fa-parachute-box"
                   activeMenu={activeMenu}
                 />
-                <MenuItem
-                  to="Chat"
-                  name="Chat"
-                  icon="fas fa-comments"
-                  activeMenu={activeMenu}
-                />
                 <li className="nav-level">Criar</li>
                 <MenuItem
                   to="CarCreate"

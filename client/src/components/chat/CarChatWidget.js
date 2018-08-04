@@ -41,7 +41,7 @@ export class CarChatWidget extends Component {
 
   render() {
     const { car } = this.props;
-    const { user } = this.props.auth;
+    const { user, isAuthenticated } = this.props.auth;
 
     const chatList = car.chat.map(chat => (
       <CarChatItem
@@ -64,30 +64,32 @@ export class CarChatWidget extends Component {
           />
         </div>
         <div className="media chat-messages padding-20 m-t-20">
-          <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
-            <div className="md-input-wrapper">
-              <input
-                type="text"
-                className={classnames("md-form-control", {
-                  "md-valid": this.state.text
-                })}
-                id="text"
-                name="text"
-                value={this.state.text}
-                onChange={this.onChange}
-              />
-              <label>Insira um comentário</label>
-              <span className="highlight" />
-              <span className="bar" />
+          {isAuthenticated && (
+            <form autoComplete="off" noValidate onSubmit={this.onSubmit}>
+              <div className="md-input-wrapper">
+                <input
+                  type="text"
+                  className={classnames("md-form-control", {
+                    "md-valid": this.state.text
+                  })}
+                  id="text"
+                  name="text"
+                  value={this.state.text}
+                  onChange={this.onChange}
+                />
+                <label>Insira um comentário</label>
+                <span className="highlight" />
+                <span className="bar" />
 
-              <button
-                type="submit"
-                className="chat-send waves-effect waves-light"
-              >
-                <i className="fas fa-paper-plane" />
-              </button>
-            </div>
-          </form>
+                <button
+                  type="submit"
+                  className="chat-send waves-effect waves-light"
+                >
+                  <i className="fas fa-paper-plane" />
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     );
