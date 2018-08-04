@@ -3,15 +3,14 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { connect } from "react-redux";
 
-import ChatItem from "./ChatItem";
+import CarChatItem from "./CarChatItem";
 import { addChatToCar } from "../../actions/chatActions";
 
-export class ChatWidget extends Component {
+export class CarChatWidget extends Component {
   static propTypes = {
-    chats: PropTypes.array.isRequired,
     auth: PropTypes.object.isRequired,
     addChatToCar: PropTypes.func.isRequired,
-    carid: PropTypes.string.isRequired
+    car: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -29,13 +28,9 @@ export class ChatWidget extends Component {
     this.el.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
-  // componentDidUpdate() {
-  //   this.el.scrollIntoView({ behavior: "smooth" });
-  // }
-
   onSubmit(e) {
     e.preventDefault();
-    this.props.addChatToCar(this.state.text, this.props.carid);
+    this.props.addChatToCar(this.state.text, this.props.car._id);
     this.setState({ text: "" });
     this.el.scrollIntoView({ behavior: "smooth" });
   }
@@ -45,10 +40,16 @@ export class ChatWidget extends Component {
   }
 
   render() {
-    const { carid } = this.props;
+    const { car } = this.props;
+    const { user } = this.props.auth;
 
-    const chatList = this.props.chats.map(chat => (
-      <ChatItem key={chat._id} chat={chat} carid={carid} />
+    const chatList = car.chat.map(chat => (
+      <CarChatItem
+        key={chat._id}
+        chat={chat}
+        carid={car._id}
+        isAdmin={car.user._id === user.id}
+      />
     ));
 
     return (
@@ -100,4 +101,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addChatToCar }
-)(ChatWidget);
+)(CarChatWidget);

@@ -5,11 +5,12 @@ import { ago } from "time-ago";
 
 import { deleteChatFromCar } from "../../actions/chatActions";
 
-export class ChatItem extends Component {
+export class CarChatItem extends Component {
   static propTypes = {
     chat: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     carid: PropTypes.string.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     deleteChatFromCar: PropTypes.func.isRequired
   };
 
@@ -31,7 +32,7 @@ export class ChatItem extends Component {
 
   render() {
     const { user, isAuthenticated } = this.props.auth;
-    const { chat } = this.props;
+    const { chat, isAdmin } = this.props;
 
     let chatitem;
     if (isAuthenticated && chat.user._id === user.id) {
@@ -73,6 +74,13 @@ export class ChatItem extends Component {
             </div>
             <div className="media-body chat-menu-content">
               <div>
+                {isAdmin && (
+                  <i
+                    onClick={this.onDelete}
+                    className="fas fa-times times-delete-chat"
+                    style={{ color: "#666" }}
+                  />
+                )}
                 <p className="chat-cont chat_user_name">{chat.user.name}</p>
                 <p className="chat-cont">{chat.text}</p>
               </div>
@@ -100,4 +108,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { deleteChatFromCar }
-)(ChatItem);
+)(CarChatItem);

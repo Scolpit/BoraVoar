@@ -7,7 +7,7 @@ import CarItem from "./CarItem";
 import NavBar from "../layout/Navbar";
 import CarItemSkeleton from "../skeleton/CarItemSkeleton";
 import RideTable from "../ride/RideTable";
-import ChatWidget from "../chat/ChatWidget";
+import CarChatWidget from "../chat/CarChatWidget";
 
 export class CarDetails extends Component {
   static propTypes = {
@@ -32,7 +32,7 @@ export class CarDetails extends Component {
         <div>
           <CarItem car={car} editable={true} />
           <div className="col-xl-6 col-lg-12">
-            <ChatWidget chats={car.chat} carid={car._id} />
+            <CarChatWidget car={car} />
           </div>
           <div className="margin-0-15">
             <RideTable
