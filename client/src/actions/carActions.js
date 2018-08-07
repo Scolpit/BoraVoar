@@ -43,10 +43,10 @@ export const addRideToCarByName = (carid, username) => dispatch => {
     });
 };
 
-//Add ride to car by id
-export const addRideToCarByUserId = (carid, userid) => dispatch => {
+//Add ride to car by Rideid
+export const addRideToCarByRideId = (carid, rideid) => dispatch => {
   axios
-    .post(`/api/cars/${carid}/ride/${userid}`)
+    .post(`/api/cars/${carid}/ride/${rideid}`)
     .then(res => {
       toast.success("Piloto adicionado com sucesso");
       dispatch({

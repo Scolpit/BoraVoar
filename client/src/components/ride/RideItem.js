@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import classnames from "classnames";
 
-import { addRideToCarByUserId } from "../../actions/carActions";
+import { addRideToCarByRideId } from "../../actions/carActions";
 import { deleteRide } from "../../actions/rideActions";
 
 export class RideItem extends Component {
@@ -13,7 +14,7 @@ export class RideItem extends Component {
     car: PropTypes.object.isRequired,
     isDetailsPage: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-    addRideToCarByUserId: PropTypes.func.isRequired,
+    addRideToCarByRideId: PropTypes.func.isRequired,
     deleteRide: PropTypes.func.isRequired
   };
 
@@ -27,8 +28,17 @@ export class RideItem extends Component {
 
   inviteToCar() {
     const { car, ride } = this.props;
-
-    this.props.addRideToCarByUserId(car.car._id, ride.user._id);
+    if (ride.used) {
+      if (
+        window.confirm(
+          "Este piloto já foi adicionado anteriormente para uma viatura. Quer adicionar na mesma?"
+        )
+      ) {
+        this.props.addRideToCarByRideId(car.car._id, ride._id);
+      }
+    } else {
+      this.props.addRideToCarByRideId(car.car._id, ride._id);
+    }
   }
 
   btnDeleteRide() {
@@ -46,7 +56,10 @@ export class RideItem extends Component {
       buttons = (
         <button
           type="button"
-          className="btn btn-primary waves-effect waves-light"
+          className={classnames("btn waves-effect waves-light", {
+            "btn-warning": ride.used,
+            "btn-primary": !ride.used
+          })}
           data-toggle="tooltip"
           data-placement="top"
           title="Convidar"
@@ -81,6 +94,7 @@ export class RideItem extends Component {
           <td className="bv_verticalmiddle">
             <Moment format="DD/MM/YYYY">{ride.date}</Moment>
           </td>
+
           <td className="bv_verticalmiddle">
             {ride.from}
             <i className="fas fa-arrow-right m-l-5 m-r-5" />
@@ -101,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addRideToCarByUserId, deleteRide }
+  { addRideToCarByRideId, deleteRide }
 )(RideItem);

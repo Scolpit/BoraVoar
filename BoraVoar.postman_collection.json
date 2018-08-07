@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "2d24068e-54b6-416b-be3b-dc08b454dce0",
+		"_postman_id": "f1803607-9dbd-443b-bd76-24c5e6782ade",
 		"name": "BoraVoar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"_postman_id": "586e66d7-bb9f-4537-a01c-fdf8ad66a302",
+			"_postman_id": "66edba14-4e9a-4a6e-8012-cab3b7e6c61b",
 			"name": "Login User",
 			"request": {
 				"method": "POST",
@@ -46,49 +46,7 @@
 			},
 			"response": [
 				{
-					"id": "414d84e7-6600-44dc-8b27-eb19d7aa179d",
-					"name": "John Dow",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "scolpit5@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "Text",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"id": "a798eb27-5657-43eb-baa4-d42e8057cdfc",
+					"id": "d64adc90-facf-4fa9-a681-4353eaf7739d",
 					"name": "Nuno Morgado",
 					"originalRequest": {
 						"method": "POST",
@@ -165,11 +123,53 @@
 					],
 					"cookie": [],
 					"body": "{\"success\":true,\"token\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViMDMxM2IyMjE2MTNjMGY3YzllNzA5ZiIsIm5hbWUiOiJOdW5vIE1vcmdhZG8iLCJhdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzkyMzU2ZWM1M2UyNjhiNDNjMjllMGQ5M2NkZWRhY2UxP3M9MjAwJnI9cGcmZD1tbSIsImlhdCI6MTUyNzE2NTEwMiwiZXhwIjoxNTI3MTY4NzAyfQ.KIzNLusYitv53WwOMSZQmPJ5JamTVygMK-LPBK6Zgbs\"}"
+				},
+				{
+					"id": "dc5b6ac8-987f-4668-a891-21dc4e9fb567",
+					"name": "John Dow",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "scolpit5@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
 				}
 			]
 		},
 		{
-			"_postman_id": "3ad223f9-ebe7-4c68-bee5-7e7a37eed3c5",
+			"_postman_id": "444602dc-f169-4d5a-a552-1b059d188f86",
 			"name": "Register User",
 			"request": {
 				"method": "POST",
@@ -220,7 +220,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "44156d01-e5e4-4ddc-ac10-5a1723f02313",
+			"_postman_id": "36c89e5d-b3d0-4106-a4da-39ac2a687c86",
 			"name": "Change Password (P)",
 			"request": {
 				"method": "POST",
@@ -266,7 +266,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "48aef526-40bc-4935-a316-8b16de405273",
+			"_postman_id": "f839bd77-5b66-494e-9ded-9c06b71324c2",
 			"name": "Change Name (P)",
 			"request": {
 				"method": "POST",
@@ -302,7 +302,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "29653986-0170-4f1a-b6a4-4ac98e7b346f",
+			"_postman_id": "5ecd762f-23dc-466a-ba02-ebb623f6dec9",
 			"name": "Get current user (P)",
 			"request": {
 				"method": "GET",
@@ -343,7 +343,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "d046d341-d80f-4023-8fda-c3431d531c0f",
+			"_postman_id": "311dc79e-96dd-40c3-b6f5-b1f6a1567cc6",
 			"name": "Add Ride (P)",
 			"request": {
 				"method": "POST",
@@ -389,7 +389,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "f6182962-57a0-418e-a5ab-3a2cc770fbaa",
+			"_postman_id": "613c2a57-492e-491d-9913-6df2c35b91a4",
 			"name": "Get All Rides",
 			"request": {
 				"method": "GET",
@@ -424,7 +424,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "41ca7ca3-d97f-4494-8164-12b1c3ff1b1d",
+			"_postman_id": "6e224e85-6403-48c7-a5fe-030ac8aa25b3",
 			"name": "Get Rides Count",
 			"request": {
 				"method": "GET",
@@ -461,7 +461,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "3eb932b2-d640-4ed5-add4-c11367f83bf8",
+			"_postman_id": "89fc05e3-3609-4e49-8117-827b5f932375",
 			"name": "Get Ride By Id",
 			"request": {
 				"method": "GET",
@@ -497,7 +497,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "4bdf7f93-875c-466a-835e-4e6c60e34a85",
+			"_postman_id": "ec669312-8aa8-4857-a7ba-3d9e45a02c95",
 			"name": "Delete Ride By Id (P)",
 			"request": {
 				"method": "DELETE",
@@ -527,7 +527,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "42075ebc-5494-4db1-8b73-de1448c2571d",
+			"_postman_id": "021e0ac4-e09d-4e9a-a508-9b99b10c2141",
 			"name": "Add Car (P)",
 			"request": {
 				"method": "POST",
@@ -578,7 +578,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "9247f9c0-cae2-4043-9079-4b1db8f72bff",
+			"_postman_id": "4a4f8b72-64c0-45b6-be01-d30df8434b1e",
 			"name": "Get Cars Count",
 			"request": {
 				"method": "GET",
@@ -615,7 +615,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "3afeacfc-4d7a-4657-90c6-78dfbb45ddb3",
+			"_postman_id": "f2841943-78f3-41fe-a11a-a1b069fe1009",
 			"name": "Get All Cars",
 			"request": {
 				"method": "GET",
@@ -650,7 +650,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "d0ecbe29-bdcb-403e-a584-e94dce66d136",
+			"_postman_id": "b30cb41c-7859-4ed2-b2db-ada7c0663e39",
 			"name": "Get Car By Id",
 			"request": {
 				"method": "GET",
@@ -686,7 +686,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "7f6c0259-59be-4b05-813f-cbd324ddc12e",
+			"_postman_id": "4501cf0f-ff4f-45d5-8743-3b0ae6afd3c5",
 			"name": "Delete Car By Id (P)",
 			"request": {
 				"method": "DELETE",
@@ -716,7 +716,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "a91c7ecf-d688-4ca6-9182-35412829a4d9",
+			"_postman_id": "69ba30cb-f355-41a4-98e9-d838d17e6a00",
 			"name": "Add Ride to Car by name (P)",
 			"request": {
 				"method": "POST",
@@ -753,7 +753,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "731673a7-facd-4a34-9ccc-608a68a1be16",
+			"_postman_id": "0b889d51-6c1c-4bf1-8fdc-cb8d4b768eeb",
 			"name": "Add Ride to Car by UserId (P)",
 			"request": {
 				"method": "POST",
@@ -768,7 +768,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{url}}/api/cars/5b300253d6cc6323f88e5be1/ride/5b2fe5c980d10435acffb02d",
+					"raw": "http://{{url}}/api/cars/5b5230e6463c36052cf8f596/ride/5b65b7f797e3f82fa07b45e0",
 					"protocol": "http",
 					"host": [
 						"{{url}}"
@@ -776,16 +776,16 @@
 					"path": [
 						"api",
 						"cars",
-						"5b300253d6cc6323f88e5be1",
+						"5b5230e6463c36052cf8f596",
 						"ride",
-						"5b2fe5c980d10435acffb02d"
+						"5b65b7f797e3f82fa07b45e0"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"_postman_id": "3e660905-f287-4b69-a0b3-b1e364a239ae",
+			"_postman_id": "ab23f31b-7919-4a7d-ab65-029e49f16efb",
 			"name": "Delete ride from Car (P)",
 			"request": {
 				"method": "DELETE",
@@ -817,7 +817,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "c4d9a7ff-26f7-4293-870e-cf97063118c5",
+			"_postman_id": "f6061104-04e9-4d29-8503-45726e51a465",
 			"name": "Mark car as Full (P)",
 			"request": {
 				"method": "POST",
@@ -858,7 +858,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "55f871d4-f305-4924-80d4-3a1151862881",
+			"_postman_id": "7273c56f-0c45-4620-9e00-cd61315b9195",
 			"name": "Post on chat (P)",
 			"request": {
 				"method": "POST",
@@ -895,7 +895,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "6ebaee16-56ce-4850-b763-301f05a3966c",
+			"_postman_id": "7fcf119e-7670-44af-9aeb-95d6beb9935f",
 			"name": "Delete Chat (P)",
 			"request": {
 				"method": "DELETE",
