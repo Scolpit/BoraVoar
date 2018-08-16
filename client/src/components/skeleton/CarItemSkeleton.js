@@ -4,73 +4,47 @@ import classnames from "classnames";
 const CarItemSkeleton = ({ editable }) => {
   return (
     <div
-      className={classnames("col-lg-12 bv_grayscale bv_caritemskeleton", {
-        "col-xl-4": !editable,
-        "col-xl-6": editable
+      className={classnames("col-lg-12", {
+        "col-xl-6": editable,
+        "col-xl-4": !editable
       })}
     >
       <div className="card">
         <div className="user-block-2">
+          <img
+            className="img-fluid"
+            src="/assets/images/avatar.png"
+            alt="user-header"
+          />
+          <h5>
+            <i className="fas fa-spinner fa-spin " />
+          </h5>
+          <h5>
+            <i className="fas fa-spinner fa-spin " />
+          </h5>
           <div>
-            <img
-              className="img-fluid"
-              src="/assets/images/widget/user-1.png"
-              alt="user-header"
-            />
-          </div>
-          <div>
-            <div className="inline-block bv_fontmagenta">
-              <h5 className="bv_fontmagenta">
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;&#9646;
-              </h5>
+            <div className="inline-block">
+              <h6>
+                <i className="fas fa-spinner fa-spin" />
+              </h6>
             </div>
-          </div>
-          <div>
-            <div className="inline-block bv_fontmagenta">
-              <h5 className="bv_fontmagenta">
-                &#9646;&#9646;/&#9646;&#9646;/&#9646;&#9646;&#9646;&#9646;
-              </h5>
+            <div className="inline-block p-l-5 p-r-5">
+              <i className="fas fa-arrow-right" />
             </div>
-          </div>
-          <div>
-            <div className="inline-block bv_fontmagenta">
-              <h6 className="bv_fontmagenta">
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646; &#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;
+            <div className="inline-block">
+              <h6>
+                <i className="fas fa-spinner fa-spin" />
               </h6>
             </div>
           </div>
           <div className="padding-20">
-            <div className="inline-block bv_fontmagenta">
-              <p className="bv_fontmagenta">
-                &#9646; &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-                &#9646; &#9646;&#9646;&#9646;&#9646; &#9646;&#9646;
-                &#9646;&#9646;&#9646; &#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-                &#9646;&#9646;&#9646; &#9646;&#9646;&#9646;&#9646;&#9646;
-                &#9646;&#9646;&#9646; &#9646; &#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-              </p>
-            </div>
+            <p className="text-white">
+              <i className="fas fa-spinner fa-spin " />
+            </p>
           </div>
         </div>
 
-        <div className="card-block">
-          <div className="user-block-2-activities">
-            <div className="user-block-2-active ">
-              <div className="inline-block bv_fontmagenta ">
-                &#9646;&#9646;&#9646;&#9646;
-                &#9646;&#9646;&#9646;&#9646;&#9646;&#9646;&#9646;
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="inline-block bv_fontmagenta width-20" />
-          </div>
-        </div>
+        <div className="card-block" />
       </div>
     </div>
   );

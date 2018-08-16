@@ -34,6 +34,11 @@ export class CarChatItem extends Component {
     const { user, isAuthenticated } = this.props.auth;
     const { chat, isAdmin } = this.props;
 
+    let date = ago(chat.date);
+    if (date.indexOf(" ms ") !== -1) {
+      date = "Agora mesmo";
+    }
+
     let chatitem;
     if (isAuthenticated && chat.user._id === user.id) {
       chatitem = (
@@ -57,7 +62,7 @@ export class CarChatItem extends Component {
                 alt="avatar"
               />
             </div>
-            <p className="chat-time">{ago(chat.date)}</p>
+            <p className="chat-time">{date}</p>
           </div>
         </div>
       );
@@ -86,7 +91,7 @@ export class CarChatItem extends Component {
               </div>
             </div>
             <p align="right" className="chat-time">
-              {ago(chat.date)}
+              {date}
             </p>
           </div>
         </div>
