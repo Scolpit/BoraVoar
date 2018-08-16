@@ -36,6 +36,7 @@ export const addRideToCarByName = (carid, username) => dispatch => {
       });
     })
     .catch(err => {
+      toast.error(err.response.data.error);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -55,7 +56,7 @@ export const addRideToCarByRideId = (carid, rideid) => dispatch => {
       });
     })
     .catch(err => {
-      toast.warning(err.response.data.warning);
+      toast.error(err.response.data.error);
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

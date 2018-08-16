@@ -138,45 +138,38 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Ride.findById(req.params.rideid)
+      .populate("user", ["name"])
       .then(ride => {
         Car.findOne({ _id: req.params.carid, user: req.user.id })
           .populate("user", ["name", "avatar"])
           .populate("chat.user", ["name", "avatar"])
           .then(car => {
-            User.findById(ride.user)
-              .then(user => {
-                //Check if pilot is already added to car
-                ridenotexist =
-                  car.rides.find(el => {
-                    return el.user == ride.user;
-                  }) == null;
+            //Check if pilot is already added to car
+            ridenotexist =
+              car.rides.find(el => {
+                return el.name == ride.user.name;
+              }) == null;
 
-                if (ridenotexist) {
-                  const newRide = {
-                    name: user.name,
-                    user: user._id
-                  };
+            if (ridenotexist) {
+              const newRide = {
+                name: ride.user.name,
+                user: ride.user._id
+              };
 
-                  //Set Ride as added
-                  ride.used = true;
-                  ride.save().then(ride => {});
-                  // Add to rides array
-                  car.rides.push(newRide);
+              //Set Ride as added
+              ride.used = true;
+              ride.save().then(ride => {});
+              // Add to rides array
+              car.rides.push(newRide);
 
-                  car.save().then(car => returnCarWithRides(car, res));
-                } else {
-                  return res
-                    .status(404)
-                    .json({ warning: "Piloto já adicionado" });
-                }
-              })
-              .catch(err =>
-                res.status(404).json({ error: "Piloto não encontrado" })
-              );
+              car.save().then(car => returnCarWithRides(car, res));
+            } else {
+              return res.status(404).json({ error: "Piloto já adicionado" });
+            }
           })
-          .catch(err => res.status(404).json({ nocarsfound: "Car not found" }));
+          .catch(err => res.status(404).json({ error: "Car not found" }));
       })
-      .catch(err => res.status(404).json({ noridefound: "Ride not found" }));
+      .catch(err => res.status(404).json({ error: "Ride not found" }));
   }
 );
 
