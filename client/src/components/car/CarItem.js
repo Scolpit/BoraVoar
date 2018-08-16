@@ -39,6 +39,7 @@ export class CarItem extends Component {
     this.onChange = this.onChange.bind(this);
     this.setLoadingOff = this.setLoadingOff.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onBoxClick = this.onBoxClick.bind(this);
   }
 
   onChange(e) {
@@ -87,6 +88,11 @@ export class CarItem extends Component {
 
   setLoadingOff() {
     this.setState({ isLoading: false });
+  }
+
+  onBoxClick() {
+    //To be used when click box on carlist
+    this.props.history.push(`/CarDetails/${this.props.car._id}`);
   }
 
   render() {
@@ -178,7 +184,12 @@ export class CarItem extends Component {
           "col-xl-4": !editable
         })}
       >
-        <div className="card">
+        <div
+          onClick={this.onBoxClick}
+          className={classnames("card", {
+            "bordershadow cursor_pointer": !editable
+          })}
+        >
           <div className="user-block-2">
             {car.full && <div className="fullcar">CHEIO</div>}
             <img
@@ -195,7 +206,11 @@ export class CarItem extends Component {
                 <h6>{car.from}</h6>
               </div>
               <div className="inline-block p-l-5 p-r-5">
-                <i className="fas fa-arrow-right" />
+                <i
+                  className={classnames("fas fa-arrow-right", {
+                    cursor_default: editable
+                  })}
+                />
               </div>
               <div className="inline-block">
                 <h6>{car.to}</h6>
