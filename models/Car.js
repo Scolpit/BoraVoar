@@ -24,7 +24,8 @@ const CarSchema = new Schema({
       },
       from: { type: String, required: true, max: 30 },
       to: { type: String, required: true, max: 30 },
-      used: { type: Boolean, default: false }
+      used: { type: Boolean, default: false },
+      date: { type: Date }
     }
   ],
   chat: [
